@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="sw">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tan_lang_chatbot — Tanzania Local Language Translator</title>
+    <meta name="description" content="Tafsiri ya papo kwa papo kati ya Sukuma, Kihaya/Ruhaya, Kinyakyusa na Kiswahili kwa sauti au maandishi.">
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="hero">
+        <div class="wrap hero-inner">
+            <div>
+                <div class="brand-lockup">
+                    <img class="brand-logo" src="/logo.png" alt="Tan Tanzania Local Language logo">
+                    <span class="pill"><i class="dot"></i> Tan_lang_chatbot</span>
+                </div>
+                <h1 data-i18n="tagline">Mtafsiri wa lugha za asili za Tanzania</h1>
+                <p class="lead" data-i18n="subtitle">
+                    Mgonjwa anaongea Kihaya, Sukuma au Kinyakyusa — daktari anasoma na kusikia Kiswahili papo hapo.
+                </p>
+            </div>
+            <div class="ui-lang">
+                <span data-i18n="uiLang">Lugha ya tovuti</span>
+                <div class="toggle">
+                    <button type="button" class="active" data-ui="sw">SW</button>
+                    <button type="button" data-ui="en">EN</button>
+                </div>
+                <div class="theme-global" aria-label="Theme">
+                    <button type="button" id="global-theme-light" data-theme="light" class="small active" data-i18n="light">Mwanga</button>
+                    <button type="button" id="global-theme-dark" data-theme="dark" class="small flag-gradient" data-i18n="dark">Giza</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <section class="card room-bar">
+            <div class="room-copy">
+                <div class="room-copy-heading">
+                    <span class="room-link-icon" aria-hidden="true">⇄</span>
+                    <div>
+                        <p class="label" data-i18n="deviceCommunication">Mawasiliano ya vifaa viwili</p>
+                        <strong data-i18n="conversationRoom">Room ya mazungumzo</strong>
+                    </div>
+                </div>
+                <p class="muted room-hint" data-i18n="roomHint">Tumia code hii kwenye simu na PC zote zilizo kwenye Wi-Fi moja.</p>
+            </div>
+            <div class="room-controls">
+                <input id="room-code" type="text" value="1234" maxlength="32" aria-label="Room code" data-i18n-aria="roomCode">
+                <select id="screen-role" aria-label="Screen role" data-i18n-aria="screenRole">
+                    <option value="patient" data-i18n="clientScreen">Screen ya mteja</option>
+                    <option value="doctor" data-i18n="staffScreen">Screen ya muhudumu</option>
+                </select>
+                <button type="button" id="room-connect" class="primary" data-i18n="connect">Unganisha</button>
+                <button type="button" id="voice-toggle" class="switch on">
+                    <span class="knob"></span><span data-i18n="voice">Sauti (soma kwa sauti)</span>
+                </button>
+            </div>
+            <span id="room-status" class="room-status offline" data-i18n="disconnected">Haijaunganishwa</span>
+        </section>
+
+        <section class="card translation-workspace">
+            <div class="conversation-panel-head">
+                <div>
+                    <p class="label" data-i18n="conversationViews">Muonekano wa mazungumzo</p>
+                    <h2 data-i18n="conversationViews">Muonekano wa mazungumzo</h2>
+                </div>
+                <div class="conversation-head-actions">
+                    <button type="button" class="settings-reopen" aria-label="Open settings" title="Open settings">⚙</button>
+                    <button type="button" id="clear" class="ghost" data-i18n="clear">Futa mazungumzo</button>
+                </div>
+            </div>
+            <div class="conversation-views">
+                <div class="view" id="view-main" data-theme="light">
+                    <div class="view-head">
+                        <strong data-i18n="conversationViews">Muonekano wa mazungumzo</strong>
+                        <div class="theme-toggle">
+                            <button type="button" data-view="main" data-theme="light" class="small active" data-i18n="light">Mwanga</button>
+                            <button type="button" data-view="main" data-theme="dark" class="small" data-i18n="dark">Giza</button>
+                        </div>
+                    </div>
+                    <div id="conversation-main" class="conversation">
+                        <p class="muted center" id="empty-main" data-i18n="empty">Mazungumzo yataonekana hapa.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="role-panels">
+                <button type="button" class="settings-heading" aria-label="Toggle settings" aria-expanded="true">
+                    <span class="settings-icon" aria-hidden="true">⚙</span>
+                    <div>
+                        <strong>Settings</strong>
+                        <span>Role, language &amp; voice</span>
+                    </div>
+                </button>
+                <article class="panel role-panel" data-role="patient">
+                    <div class="panel-head">
+                        <div>
+                            <select id="patient-role-select" class="role-select">
+                            <option value="Mgonjwa">Mgonjwa</option>
+                            <option value="Mteja">Mteja</option>
+                            <option value="Muhudumu">Muhudumu</option>
+                            <option value="Muuguzi">Muuguzi</option>
+                            <option value="Daktari">Daktari</option>
+                            <option value="Muhubiri">Muhubiri</option>
+                            <option value="Muumini">Muumini</option>
+                            <option value="Mwalimu">Mwalimu</option>
+                            <option value="Msaidizi">Msaidizi</option>
+                            <option value="Custom">Custom</option>
+                        </select>
+                            <p class="muted" id="patient-lang-label">Ruhaya</p>
+                            <div class="small">
+                                <label class="muted" for="patient-language-select" data-i18n="conversationLanguage">Lugha ya mazungumzo:</label>
+                                <select id="patient-language-select" class="lang-select">
+                                <option value="Ruhaya">Kihaya </option>
+                                <option value="Sukuma">Sukuma</option>
+                                <option value="Kinyakyusa">Kinyakyusa</option>
+                                <option value="Kichaga">Kichaga</option>
+                                <option value="Kihehe">Kihehe</option>
+                                <option value="Kiha">Kiha</option>
+                                <option value="Kijita">Kijita</option>
+                                <option value="Kizaramo">Kizaramo</option>
+                                <option value="Kimasai">Kimasai</option>
+                                <option value="Kifipa">Kifipa</option>
+                                <option value="Kiswahili">Kiswahili</option>
+                                <option value="English">English</option>
+                                <option value="French">French</option>
+                            </select>
+                            </div>
+                            <div class="small">
+                                <label class="muted"><span data-i18n="gender">Jinsia</span>: <span id="patient-gender">Auto</span></label>
+                                <select id="patient-gender-select" class="gender-select">
+                                <option value="auto" data-i18n="auto">Auto</option>
+                                <option value="female" data-i18n="female">Female</option>
+                                <option value="male" data-i18n="male">Male</option>
+                            </select>
+                            </div>
+                        </div>
+                </article>
+
+                <article class="panel role-panel" data-role="doctor">
+                    <div class="panel-head">
+                        <div>
+                            <select id="doctor-role-select" class="role-select">
+                            <option value="Daktari">Daktari</option>
+                            <option value="Muhudumu">Muhudumu</option>
+                            <option value="Muuguzi">Muuguzi</option>
+                            <option value="Mteja">Mteja</option>
+                            <option value="Mgonjwa">Mgonjwa</option>
+                            <option value="Muhubiri">Muhubiri</option>
+                            <option value="Muumini">Muumini</option>
+                            <option value="Mwalimu">Mwalimu</option>
+                            <option value="Msaidizi">Msaidizi</option>
+                            <option value="Custom">Custom</option>
+                        </select>
+                            <p class="muted" id="doctor-lang-label">Kiswahili</p>
+                            <div class="small">
+                                <label class="muted" for="doctor-language-select" data-i18n="conversationLanguage">Lugha ya mazungumzo:</label>
+                                <select id="doctor-language-select" class="lang-select">
+                                <option value="Kiswahili">Kiswahili</option>
+                                <option value="Ruhaya">Kihaya / Ruhaya</option>
+                                <option value="Sukuma">Sukuma</option>
+                                <option value="Kinyakyusa">Kinyakyusa</option>
+                                <option value="Kichaga">Kichaga</option>
+                                <option value="Kihehe">Kihehe</option>
+                                <option value="Kiha">Kiha</option>
+                                <option value="Kijita">Kijita</option>
+                                <option value="Kizaramo">Kizaramo</option>
+                                <option value="Kimasai">Kimasai</option>
+                                <option value="Kifipa">Kifipa</option>
+                                <option value="English">English</option>
+                                <option value="French">French</option>
+                            </select>
+                            </div>
+                            <div class="small">
+                                <label class="muted"><span data-i18n="gender">Jinsia</span>: <span id="doctor-gender">Auto</span></label>
+                                <select id="doctor-gender-select" class="gender-select">
+                                <option value="auto" data-i18n="auto">Auto</option>
+                                <option value="female" data-i18n="female">Female</option>
+                                <option value="male" data-i18n="male">Male</option>
+                            </select>
+                            </div>
+                        </div>
+                </article>
+                </div>
+
+                <div class="composer-dock">
+                    <div class="composer" data-composer="patient">
+                        <div class="composer-label">
+                            <strong class="patient" id="patient-composer-role">Mgonjwa</strong>
+                            <span class="muted" id="patient-composer-lang">Ruhaya</span>
+                        </div>
+                        <div class="composer-controls">
+                            <button type="button" class="mic" data-mic="patient" aria-label="mic" data-i18n-aria="microphone">🎙️</button>
+                            <div class="composer-field">
+                                <div class="live" id="live-patient" data-i18n="tapToSpeak">Bonyeza kuongea</div>
+                                <div class="row">
+                                    <input type="text" id="input-patient" placeholder="Andika hapa…" data-i18n-ph="typeHere">
+                                    <button type="button" class="primary flag-gradient" data-send="patient" data-i18n="send">Tuma</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="composer" data-composer="doctor">
+                        <div class="composer-label">
+                            <strong class="doctor" id="doctor-composer-role">Daktari</strong>
+                            <span class="muted" id="doctor-composer-lang">Kiswahili</span>
+                        </div>
+                        <div class="composer-controls">
+                            <button type="button" class="mic" data-mic="doctor" aria-label="mic" data-i18n-aria="microphone">🎙️</button>
+                            <div class="composer-field">
+                                <div class="live" id="live-doctor" data-i18n="tapToSpeak">Bonyeza kuongea</div>
+                                <div class="row">
+                                    <input type="text" id="input-doctor" placeholder="Andika hapa…" data-i18n-ph="typeHere">
+                                    <button type="button" class="primary flag-gradient" data-send="doctor" data-i18n="send">Tuma</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+        <section class="card">
+            <h2 data-i18n="compare">Linganisha lugha</h2>
+            <p class="muted" data-i18n="compareHint">Andika neno kisha uone jinsi linavyosemwa kwa lugha zote.</p>
+            <div class="row">
+                <input type="text" id="compare-input" placeholder="Andika hapa…" data-i18n-ph="typeHere">
+                <button type="button" class="primary flag-gradient" id="compare-btn" data-i18n="compare">Linganisha lugha</button>
+            </div>
+            <div id="compare-result"></div>
+        </section>
+    </main>
+
+    <footer>LocalLang AI · Sukuma · Kihaya/Ruhaya · Kinyakyusa · Kiswahili</footer>
+    <script src="/static/app.js"></script>
+    <script>
+        // Minimal fallback: if main app failed to initialize, attach simple handlers so UI remains usable.
+        (function() {
+            if (window.LL_APP_INIT) return; // app.js loaded successfully
+            console.warn('LL app main script did not initialize; attaching fallback handlers');
+            const setGlobalTheme = (theme) => {
+                document.body.setAttribute('data-theme', theme);
+                localStorage.setItem('ll_theme', theme);
+            };
+            const gLight = document.getElementById('global-theme-light');
+            const gDark = document.getElementById('global-theme-dark');
+            if (gLight) gLight.onclick = () => setGlobalTheme('light');
+            if (gDark) gDark.onclick = () => setGlobalTheme('dark');
+            // simple send fallback: posts to /api/translate and appends bare bubbles to each view
+            Array.from(document.querySelectorAll('[data-send]')).forEach(btn => {
+                btn.addEventListener('click', async function() {
+                    const side = btn.dataset.send;
+                    const input = document.querySelector(`#input-${side}`);
+                    if (!input) return;
+                    const text = input.value.trim();
+                    if (!text) return;
+                    input.value = '';
+                    const conversationBox = document.getElementById('conversation-main');
+                    conversationBox && conversationBox.insertAdjacentHTML('beforeend', `<div class="bubble ${side}"><p class="orig">${text}</p><p class="trans">…</p></div>`);
+                    try {
+                        const sourceSelect = document.getElementById(`${side}-language-select`);
+                        const targetSelect = document.getElementById(`${side === 'patient' ? 'doctor' : 'patient'}-language-select`);
+                        const source = sourceSelect ? sourceSelect.value : (side === 'patient' ? 'Ruhaya' : 'Kiswahili');
+                        const target = targetSelect ? targetSelect.value : (side === 'patient' ? 'Kiswahili' : 'Ruhaya');
+                        const res = await fetch('/api/translate', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                text,
+                                source_language: source,
+                                target_language: target
+                            })
+                        });
+                        const data = await res.json();
+                        conversationBox && conversationBox.insertAdjacentHTML('beforeend', `<div class="bubble ${side}"><p class="orig">${text}</p><p class="trans">${data.translation||data.message||'—'}</p></div>`);
+                    } catch (e) {
+                        conversationBox && conversationBox.insertAdjacentHTML('beforeend', `<div class="bubble ${side}"><p class="orig">${text}</p><p class="warn">Offline or error</p></div>`);
+                    }
+                });
+            });
+        })();
+        // Ensure send buttons have a minimal handler even if app.js partially failed.
+        (function() {
+            Array.from(document.querySelectorAll('[data-send]')).forEach(btn => {
+                if (btn._ll_min_handler) return; // already attached
+                btn._ll_min_handler = true;
+                btn.addEventListener('click', async function() {
+                    try {
+                        // If app's submit exists, use it
+                        if (window.submit && typeof window.submit === 'function') {
+                            const side = btn.dataset.send;
+                            const input = document.querySelector(`#input-${side}`);
+                            if (!input) return;
+                            const text = input.value.trim();
+                            if (!text) return;
+                            input.value = '';
+                            window.submit(side, text);
+                            return;
+                        }
+                    } catch (e) {
+                        console.debug('min handler submit failed', e);
+                    }
+                    // fallback simple behaviour (same as above)
+                    const side = btn.dataset.send;
+                    const input = document.querySelector(`#input-${side}`);
+                    if (!input) return;
+                    const text = input.value.trim();
+                    if (!text) return;
+                    input.value = '';
+                    const conversationBox = document.getElementById('conversation-main');
+                    conversationBox && conversationBox.insertAdjacentHTML('beforeend', `<div class="bubble ${side}"><p class="orig">${text}</p><p class="trans">…</p></div>`);
+                    try {
+                        const sourceSelect = document.getElementById(`${side}-language-select`);
+                        const targetSelect = document.getElementById(`${side === 'patient' ? 'doctor' : 'patient'}-language-select`);
+                        const source = sourceSelect ? sourceSelect.value : (side === 'patient' ? 'Ruhaya' : 'Kiswahili');
+                        const target = targetSelect ? targetSelect.value : (side === 'patient' ? 'Kiswahili' : 'Ruhaya');
+                        const res = await fetch('/api/translate', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                text,
+                                source_language: source,
+                                target_language: target
+                            })
+                        });
+                        const data = await res.json();
+                        conversationBox && conversationBox.insertAdjacentHTML('beforeend', `<div class="bubble ${side}"><p class="orig">${text}</p><p class="trans">${data.translation||data.message||'—'}</p></div>`);
+                    } catch (e) {
+                        conversationBox && conversationBox.insertAdjacentHTML('beforeend', `<div class="bubble ${side}"><p class="orig">${text}</p><p class="warn">Offline or error</p></div>`);
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+
+</html>

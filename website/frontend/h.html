@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="sw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="theme-color" content="#07552b">
+    <title>LocalLang Tanzania AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/local.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <a class="brand" href="#home"><span class="brand-mark">TZ</span><span>LocalLang <b>Tanzania AI</b></span></a>
+        <nav id="siteNav">
+            <a href="#home" data-i18n="navHome">Mwanzo</a>
+            <a href="#how" data-i18n="navHow">Jinsi inavyofanya kazi</a>
+            <a href="#users" data-i18n="navUsers">Wataalamu</a>
+            <a href="#features" data-i18n="navFeatures">Features</a>
+            <a href="#purpose" data-i18n="navPurpose">Faida</a>
+            <a href="/docs.html" data-i18n="navDocs">Documentation</a>
+        </nav>
+        <div class="nav-tools">
+            <label class="language-switcher" title="Page language">
+        <span>🌐</span>
+        <select id="uiLanguage" aria-label="Choose website language">
+          <option value="sw">SW</option>
+          <option value="en">EN</option>
+        </select>
+      </label>
+            <a class="start" href="/index.html" data-i18n="start">Anza kutumia →</a>
+            <button type="button" id="mobileMenu" class="menu" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main id="home">
+        <!-- MAIN TITLE / HERO: Tanzania flag is the background -->
+        <section class="hero section-bg flag-title reveal">
+            <div class="hero-overlay"></div>
+            <div class="hero-copy">
+                <div class="eyebrow"><i></i><span data-i18n="eyebrow">AKILI BANDIA KWA LUGHA ZA TANZANIA</span></div>
+                <h1 id="mainHeading">Teknolojia inayozungumza na kutafsiri <span>Kisukuma.</span></h1>
+                <p id="heroDescription" data-i18n="heroDescription">LocalLang Tanzania AI inaleta tafsiri, mazungumzo na teknolojia ya lugha karibu na jamii za Tanzania.</p>
+                <div class="hero-actions">
+                    <a class="btn primary" href="#features" data-i18n="try">Jaribu mfumo →</a>
+                    <a class="btn ghost" href="#how" data-i18n="learn">Jinsi inavyofanya kazi</a>
+                </div>
+                <div class="stats">
+                    <div><b>30+</b><small data-i18n="statLanguages">Lugha zinazolengwa</small></div>
+                    <div><b>4</b><small data-i18n="statContexts">Miktadha ya matumizi</small></div>
+                    <div><b>24/7</b><small data-i18n="statAccess">Upatikanaji unaolengwa</small></div>
+                </div>
+            </div>
+
+            <div class="hero-side">
+                <div class="hero-photo-card">
+                    <img src="static/image/maasai.jpg" alt="Mandhari ya jamii za tanzania">
+                    <div class="photo-caption">🇹🇿 <span data-i18n="heritage">UTAMADUNI · LUGHA · TEKNOLOJIA</span></div>
+                </div>
+                <div class="hero-badge">AI <span>+</span> 🇹🇿</div>
+            </div>
+
+            <!-- Slow language slider: 60 seconds -->
+            <div class="language-ribbon" aria-label="Tanzania languages">
+                <div class="ribbon-title" data-i18n="chooseLanguage">Chagua lugha</div>
+                <div class="tribe-window">
+                    <div class="tribe-track" id="tribeTrack"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS MUST FOLLOW THE MAIN TITLE -->
+        <section class="section-bg workflow reveal" id="how">
+            <div class="section-overlay"></div>
+            <div class="section-inner">
+                <div class="section-head">
+                    <div>
+                        <div class="eyebrow"><i></i><span data-i18n="howEyebrow">JINSI INAVYOFANYA KAZI</span></div>
+                        <h2 data-i18n="howTitle">Kutoka <span>lugha</span> hadi maana.</h2>
+                    </div>
+                    <p data-i18n="howIntro">Mfumo hupokea ujumbe, hutambua lugha na muktadha, huchakata taarifa, kisha hutoa jibu linaloeleweka.</p>
+                </div>
+                <div class="flow">
+                    <article class="flow-step"><b>01</b>
+                        <div class="flow-icon">🗣️</div>
+                        <h3 data-i18n="step1Title">Mtumiaji anaongea</h3>
+                        <p data-i18n="step1Text">Anaandika au kuzungumza kwa lugha anayochagua.</p>
+                    </article>
+                    <div class="arrow">→</div>
+                    <article class="flow-step"><b>02</b>
+                        <div class="flow-icon">🧠</div>
+                        <h3 data-i18n="step2Title">AI inaelewa</h3>
+                        <p data-i18n="step2Text">NLP hutambua maneno, muktadha na mahitaji ya mazungumzo.</p>
+                    </article>
+                    <div class="arrow">→</div>
+                    <article class="flow-step"><b>03</b>
+                        <div class="flow-icon">🔄</div>
+                        <h3 data-i18n="step3Title">Inatafsiri</h3>
+                        <p data-i18n="step3Text">Mfumo huunganisha lugha ya chanzo na lugha lengwa.</p>
+                    </article>
+                    <div class="arrow">→</div>
+                    <article class="flow-step"><b>04</b>
+                        <div class="flow-icon">💬</div>
+                        <h3 data-i18n="step4Title">Jibu linatoka</h3>
+                        <p data-i18n="step4Text">Mtumiaji hupata jibu kwa lugha na muktadha unaofaa.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- USERS / PROFESSIONAL CONTEXT -->
+        <section class="section-bg users reveal" id="users">
+            <div class="section-overlay"></div>
+            <div class="section-inner">
+                <div class="section-head">
+                    <div>
+                        <div class="eyebrow"><i></i><span data-i18n="usersEyebrow">WATAALAMU NA WATUMIAJI</span></div>
+                        <h2 data-i18n="usersTitle">AI kwa maisha <span>halisi.</span></h2>
+                    </div>
+                    <p data-i18n="usersIntro">Teknolojia inaweza kubadilika kulingana na mazingira ya mtumiaji.</p>
+                </div>
+                <div class="pro-grid">
+                    <article class="pro-card"><img src="static/image/doctors.jpg" alt="Tanzania landscape">
+                        <div><label data-i18n="health">AFYA</label>
+                            <h3 data-i18n="healthTitle">Daktari ↔ Mgonjwa</h3>
+                            <p data-i18n="healthText">Mawasiliano rahisi kati ya mhudumu wa afya na mgonjwa kwa lugha anayoielewa.</p>
+                        </div>
+                    </article>
+                    <article class="pro-card"><img src="static/image/teachers.jpg" alt="Tanzania nature">
+                        <div><label data-i18n="education">ELIMU</label>
+                            <h3 data-i18n="educationTitle">Mwalimu ↔ Mwanafunzi</h3>
+                            <p data-i18n="educationText">Maswali, maelezo na kujifunza kwa lugha inayomfikia mwanafunzi.</p>
+                        </div>
+                    </article>
+                    <article class="pro-card"><img src="static/image/social.jpg" alt="Tanzania scenery">
+                        <div><label data-i18n="community">JAMII</label>
+                            <h3 data-i18n="communityTitle">Wananchi ↔ Huduma</h3>
+                            <p data-i18n="communityText">Taarifa na huduma za jamii kufikika kwa lugha mbalimbali.</p>
+                        </div>
+                    </article>
+                    <article class="pro-card"><img src="static/image/recommendation.jpg" alt="Tanzania landscape">
+                        <div><label data-i18n="culture">UTAMADUNI</label>
+                            <h3 data-i18n="cultureTitle">Lugha ↔ Urithi</h3>
+                            <p data-i18n="cultureText">Kukusanya, kuhifadhi na kutumia lugha za asili kwenye teknolojia.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES: replaces the old parts 5 and 6 -->
+        <section class="section-bg features reveal" id="features">
+            <div class="section-overlay"></div>
+            <div class="section-inner">
+                <div class="section-head centered">
+                    <div>
+                        <div class="eyebrow"><i></i><span data-i18n="featuresEyebrow">VIPENGELE</span></div>
+                        <h2 data-i18n="featuresTitle">Kila kitu kwa <span>lugha yako.</span></h2>
+                    </div>
+                    <p data-i18n="featuresIntro">Muundo umejengwa ukiweka lugha, sauti, tafsiri na uzoefu wa mtumiaji mbele.</p>
+                </div>
+                <div class="feature-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon">🌍</div>
+                        <h3 data-i18n="f1Title">Lugha nyingi</h3>
+                        <p data-i18n="f1Text">Chagua lugha ya Tanzania na ubadilishe kichwa cha mfumo papo hapo.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">🎙️</div>
+                        <h3 data-i18n="f2Title">Sauti</h3>
+                        <p data-i18n="f2Text">Andika, ongea, rekodi na sikiliza majibu kwa uzoefu wa mawasiliano wa asili.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3 data-i18n="f3Title">Muktadha wa AI</h3>
+                        <p data-i18n="f3Text">Afya, elimu, jamii na mazungumzo ya kawaida vinaweza kutenganishwa.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">🔗</div>
+                        <h3 data-i18n="f4Title">API tayari</h3>
+                        <p data-i18n="f4Text">Inaweza kuunganishwa na FastAPI, database na model ya lugha ya mradi.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3 data-i18n="f5Title">Maktaba ya lugha</h3>
+                        <p data-i18n="f5Text">Msamiati, sentensi, tafsiri na metadata vinaweza kukusanywa kwa ajili ya training.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">🔐</div>
+                        <h3 data-i18n="f6Title">Usalama na udhibiti</h3>
+                        <p data-i18n="f6Text">Muundo unaweza kuongezewa authentication, roles na ruhusa za API.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-bg purpose reveal" id="purpose">
+            <div class="section-overlay"></div>
+            <div class="section-inner purpose-inner">
+                <div>
+                    <div class="eyebrow"><i></i><span data-i18n="purposeEyebrow">LENGO LA MRADI</span></div>
+                    <h2 data-i18n="purposeTitle">Teknolojia isimuache <span>mtanzania nyuma.</span></h2>
+                    <p data-i18n="purposeText">LocalLang Tanzania AI inalenga kupunguza kikwazo cha lugha katika afya, elimu, huduma za jamii, biashara, utafiti na uhifadhi wa lugha.</p>
+                </div>
+                <div class="purpose-list">
+                    <div><b>01</b><span><strong data-i18n="p1Title">Afya</strong><small data-i18n="p1Text">Mawasiliano bora kati ya mgonjwa na mhudumu.</small></span></div>
+                    <div><b>02</b><span><strong data-i18n="p2Title">Elimu</strong><small data-i18n="p2Text">Maarifa yanayofikika kwa lugha mbalimbali.</small></span></div>
+                    <div><b>03</b><span><strong data-i18n="p3Title">Uhifadhi</strong><small data-i18n="p3Text">Kulinda maneno, sauti na maarifa ya jamii.</small></span></div>
+                    <div><b>04</b><span><strong data-i18n="p4Title">Teknolojia</strong><small data-i18n="p4Text">API na data kwa waendelezaji wa kizazi kijacho.</small></span></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-brand">🇹🇿 <b>LocalLang Tanzania AI</b></div>
+        <span data-i18n="footer">Akili Bandia kwa lugha za Tanzania · Umoja kupitia teknolojia · 2026</span>
+    </footer>
+
+    <script src="/static/local.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+
+<html lang="sw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Documentation rasmi ya Tan_language na Tan_lang_chatbot — installation, Room connection, IP connection, library na troubleshooting.">
+
+    <title>Documentation | LocalLang Tanzania AI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/local.css">
+    <link rel="stylesheet" href="/static/docs.css">
+
+</head>
+
+<body class="docs-page">
+
+    <!-- ================= NAVBAR ================= -->
+    <header class="navbar docs-nav">
+
+        <a class="brand" href="/">
+            <span class="brand-mark">TZ</span>
+            <span>LocalLang <b>Tanzania AI</b></span>
+        </a>
+
+        <nav id="docsNav">
+            <a href="home.html" data-i18n="nav">Nyumbani</a>
+            <a href="#install" data-i18n="navInstall">Jinsi ya kutumia</a>
+            <a href="#quick-start" data-i18n="navQuick">Anza kwa haraka</a>
+            <a href="#room" data-i18n="navRoom">Room</a>
+            <a href="#library" data-i18n="navLibrary">Maktaba</a>
+            <a href="#chatbot" data-i18n="navChatbot">Chatbot</a>
+        </nav>
+
+        <div class="nav-tools">
+
+            <!-- LANGUAGE -->
+            <div class="docs-language">
+                <button type="button" class="lang-btn active" data-lang="sw">SW</button>
+                <button type="button" class="lang-btn" data-lang="en">EN</button>
+            </div>
+
+            <!-- THEME -->
+            <button type="button" id="docsThemeToggle" class="docs-theme-toggle" aria-label="Badilisha light na dark mode">
+
+            <span class="theme-icon">☼</span>
+            <span class="theme-label">Light</span>
+
+        </button>
+
+            <a class="start" href="/index.html" data-i18n="openChatbot">
+            Fungua chatbot →
+        </a>
+
+            <button type="button" id="docsMenu" class="menu" aria-label="Menu">
+            ☰
+        </button>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- ================= HERO ================= -->
+        <section class="docs-hero">
+
+            <div class="docs-container docs-hero-grid">
+
+                <div class="docs-hero-copy">
+
+                    <span class="docs-kicker">
+                    TAN_LANGUAGE DOCUMENTATION
+                </span>
+
+                    <h1 data-i18n="heroTitle">
+                        Jenga mawasiliano kwa
+                        <span>lugha za Tanzania.</span>
+                    </h1>
+
+                    <p data-i18n="heroDescription">
+                        Mwongozo rasmi wa ku-install, kutumia Tan_language, kuendesha Tan_lang_chatbot na kuunganisha vifaa viwili kwa Room Code au IP Address.
+                    </p>
+
+                    <div class="docs-hero-actions">
+
+                        <a class="docs-button docs-button-primary" href="#install" data-i18n="startInstallation">
+                        Anza Installation
+                    </a>
+
+                        <a class="docs-button docs-button-ghost" href="#quick-start" data-i18n="quickStart">
+                        Quick Start
+                    </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TERMINAL -->
+                <div class="code-window hero-window">
+
+                    <div class="window-bar">
+
+                        <span class="window-dot red"></span>
+                        <span class="window-dot yellow"></span>
+                        <span class="window-dot green"></span>
+
+                        <b>VS Code · PowerShell</b>
+
+                    </div>
+
+                    <div class="code-body">
+
+                        <div class="code-line muted-code">
+                            PS C:\my-project&gt;
+                            <span id="typingCommand"></span>
+                            <span class="cursor"></span>
+                        </div>
+
+                        <div class="code-line success-code" id="typingOutput" data-i18n="terminalReady">
+                            ✓ Tan_lang_chatbot iko tayari kutumika
+                        </div>
+
+                        <div class="code-line muted-code">
+                            PS C:\my-project&gt;
+                            <span class="command-pulse">
+                            tan-lang-chatbot
+                        </span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CONTENT ================= -->
+
+        <div class="docs-container docs-layout">
+
+            <!-- SIDEBAR -->
+            <aside class="docs-sidebar">
+
+                <span data-i18n="contents">
+                YALIYOMO
+            </span>
+
+                <a href="#install">
+                    <b>01</b>
+                    <span data-i18n="navInstall">Installation</span>
+                </a>
+
+                <a href="#quick-start">
+                    <b>02</b>
+                    <span data-i18n="navQuick">Quick Start</span>
+                </a>
+
+                <a href="#room">
+                    <b>03</b>
+                    <span data-i18n="navRoom">Room & Device Connection</span>
+                </a>
+
+                <a href="#ip-connection">
+                    <b>04</b>
+                    <span data-i18n="navIP">IP Address Connection</span>
+                </a>
+
+                <a href="#library">
+                    <b>05</b>
+                    <span data-i18n="navLibrary">Tan_language Library</span>
+                </a>
+
+                <a href="#chatbot">
+                    <b>06</b>
+                    <span data-i18n="navChatbot">Tan_lang_chatbot</span>
+                </a>
+
+                <a href="#commands">
+                    <b>07</b>
+                    <span data-i18n="navCommands">Commands</span>
+                </a>
+
+                <a href="#troubleshooting">
+                    <b>08</b>
+                    <span data-i18n="navTroubleshooting">Troubleshooting</span>
+                </a>
+
+            </aside>
+
+
+            <!-- MAIN ARTICLE -->
+            <article class="docs-content">
+
+
+                <!-- ================= INSTALL ================= -->
+                <section class="docs-section" id="install">
+
+                    <span class="section-number">01</span>
+
+                    <h2 data-i18n="installTitle">
+                        Installation
+                    </h2>
+
+                    <p data-i18n="installDescription">
+                        Tan_language na Tan_lang_chatbot zinaweza kusakinishwa kupitia Python Package Index (PyPI). Tumia Python 3.12 au version inayoungwa mkono na package.
+                    </p>
+
+
+                    <div class="install-cards">
+
+                        <div class="install-card">
+
+                            <div class="install-icon">📚</div>
+
+                            <h3 data-i18n="libraryInstallTitle">
+                                Library pekee
+                            </h3>
+
+                            <p data-i18n="libraryInstallDescription">
+                                Kwa developer anayehitaji translation engine, Python API na CLI bila web chatbot.
+                            </p>
+
+                            <div class="copy-code">
+
+                                <code>
+                                python -m pip install Tan_language
+                            </code>
+
+                                <button type="button" data-copy="python -m pip install Tan_language" data-i18n="copy">
+                                Copy
+                            </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="install-card featured-install">
+
+                            <div class="install-icon">💬</div>
+
+                            <h3 data-i18n="chatbotInstallTitle">
+                                Web Chatbot
+                            </h3>
+
+                            <p data-i18n="chatbotInstallDescription">
+                                Application kamili yenye backend, frontend, translation engine na Room communication.
+                            </p>
+
+                            <div class="copy-code">
+
+                                <code>
+                                python -m pip install Tan_lang_chatbot
+                            </code>
+
+                                <button type="button" data-copy="python -m pip install Tan_lang_chatbot" data-i18n="copy">
+                                Copy
+                            </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="note">
+
+                        <strong data-i18n="important">
+                        Muhimu:
+                    </strong>
+
+                        <span data-i18n="installNote">
+                        Usitumie --no-deps. Pip ita-install
+                        dependencies zinazohitajika automatically.
+                    </span>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= QUICK START ================= -->
+                <section class="docs-section" id="quick-start">
+
+                    <span class="section-number">02</span>
+
+                    <h2 data-i18n="quickTitle">
+                        Quick Start
+                    </h2>
+
+                    <p data-i18n="quickDescription">
+                        Hii ndiyo njia ya haraka ya kusakinisha na kuanzisha Tan_lang_chatbot kwenye computer yako.
+                    </p>
+
+
+                    <div class="code-window docs-terminal">
+
+                        <div class="window-bar">
+
+                            <span class="window-dot red"></span>
+                            <span class="window-dot yellow"></span>
+                            <span class="window-dot green"></span>
+
+                            <b>PowerShell</b>
+
+                            <button type="button" class="copy-window" data-copy="python -m pip install --upgrade Tan_lang_chatbot&#10;tan-lang-chatbot" data-i18n="copyAll">
+                            Copy all
+                        </button>
+
+                        </div>
+
+
+                        <pre><code><span class="prompt">PS&gt;</span> python -m pip install --upgrade Tan_lang_chatbot
+```
+
+<span class="output">Successfully installed Tan_lang_chatbot</span>
+
+<span class="prompt">PS></span> tan-lang-chatbot
+
+<span class="output">Uvicorn running on http://127.0.0.1:8000</span></code></pre> ```
+                    </div>
+
+
+                    <div class="step-card">
+
+                        <span>01</span>
+
+                        <div>
+
+                            <h3 data-i18n="quickStep1Title">
+                                Start server
+                            </h3>
+
+                            <p data-i18n="quickStep1">
+                                Run tan-lang-chatbot kwenye terminal.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="step-card">
+
+                        <span>02</span>
+
+                        <div>
+
+                            <h3 data-i18n="quickStep2Title">
+                                Open browser
+                            </h3>
+
+                            <p>
+                                Fungua
+                                <code>http://127.0.0.1:8000</code> kwenye browser ya computer hiyo.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="note note-blue">
+
+                        <strong data-i18n="localhostTitle">
+                        Kumbuka kuhusu 127.0.0.1:
+                    </strong>
+
+                        <span data-i18n="localhostDescription">
+                        127.0.0.1 ni local address ya kifaa chenyewe.
+                        Kifaa kingine hakiwezi kutumia 127.0.0.1 ya PC
+                        yako kufungua server hiyo.
+                    </span>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= ROOM ================= -->
+                <section class="docs-section" id="room">
+
+                    <span class="section-number">03</span>
+
+                    <h2 data-i18n="roomTitle">
+                        Room: Kuunganisha Vifaa Viwili
+                    </h2>
+
+                    <p data-i18n="roomDescription">
+                        Tan_lang_chatbot inaweza kutumia Room Code kutengeneza nafasi ya pamoja ya mazungumzo. Vifaa viwili vinaweza kuingia kwenye Room moja na kushiriki conversation.
+                    </p>
+
+
+                    <div class="room-diagram">
+
+                        <div class="device-card">
+
+                            <div class="device-icon">💻</div>
+
+                            <strong data-i18n="doctorDevice">
+                            PC ya Daktari
+                        </strong>
+
+                            <span>
+                            Room:
+                            <code>1234</code>
+                        </span>
+
+                        </div>
+
+
+                        <div class="room-connector">
+                            ⇄
+                        </div>
+
+
+                        <div class="device-card">
+
+                            <div class="device-icon">📱</div>
+
+                            <strong data-i18n="patientDevice">
+                            Simu ya Mgonjwa
+                        </strong>
+
+                            <span>
+                            Room:
+                            <code>1234</code>
+                        </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <h3 data-i18n="roomStep1Title">
+                        Hatua ya 1 — Anzisha chatbot
+                    </h3>
+
+                    <p data-i18n="roomStep1">
+                        Kwenye PC ambayo itaendesha server, anzisha chatbot:
+                    </p>
+
+
+                    <div class="code-window docs-terminal">
+
+                        <pre><code><span class="prompt">PS&gt;</span> tan-lang-chatbot
+<span class="output">
+Uvicorn running on http://127.0.0.1:8000
+</span></code></pre>
+                    </div>
+
+
+                    <h3 data-i18n="roomStep2Title">
+                        Hatua ya 2 — Tengeneza Room Code
+                    </h3>
+
+                    <p data-i18n="roomStep2">
+                        Kwenye chatbot, sehemu ya Room ya mazungumzo, weka code ambayo vifaa vyote vitatumia.
+                    </p>
+
+
+                    <div class="code-window room-example">
+
+                        <pre><code>Room Code: <span class="string">1234</span></code></pre>
+
+                    </div>
+
+
+                    <h3 data-i18n="roomStep3Title">
+                        Hatua ya 3 — Chagua role
+                    </h3>
+
+
+                    <div class="info-grid">
+
+                        <div>
+
+                            <b data-i18n="deviceOne">
+                            Kifaa cha kwanza
+                        </b>
+
+                            <p>
+                                Room Code:
+                                <code>1234</code>
+                                <br> Role:
+                                <strong data-i18n="doctor">
+                                Daktari
+                            </strong>
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <b data-i18n="deviceTwo">
+                            Kifaa cha pili
+                        </b>
+
+                            <p>
+                                Room Code:
+                                <code>1234</code>
+                                <br> Role:
+                                <strong data-i18n="patient">
+                                Mgonjwa
+                            </strong>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <h3 data-i18n="roomStep4Title">
+                        Hatua ya 4 — Unganisha
+                    </h3>
+
+                    <p data-i18n="roomStep4">
+                        Kwenye vifaa vyote viwili, tumia Room Code ile ile kisha bonyeza Unganisha.
+                    </p>
+
+
+                    <div class="connection-status">
+
+                        <div>
+                            <span class="status-dot"></span>
+                            <strong>PC</strong>
+                            <span data-i18n="connected">
+                            Connected
+                        </span>
+                        </div>
+
+                        <div>
+                            <span class="status-dot"></span>
+                            <strong>Phone</strong>
+                            <span data-i18n="connected">
+                            Connected
+                        </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="note note-blue">
+
+                        <strong data-i18n="roomImportant">
+                        Muhimu:
+                    </strong>
+
+                        <span data-i18n="roomImportantText">
+                        Room Code hutambulisha conversation,
+                        lakini kifaa cha pili bado kinahitaji
+                        kufikia server ya chatbot kupitia network.
+                        Hapo ndipo IP Address connection inahitajika.
+                    </span>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= IP CONNECTION ================= -->
+                <section class="docs-section" id="ip-connection">
+
+                    <span class="section-number">04</span>
+
+                    <h2 data-i18n="ipTitle">
+                        Kuunganisha kwa IP Address
+                    </h2>
+
+                    <p data-i18n="ipDescription">
+                        Kama chatbot inaendesha kwenye PC moja na unataka simu au PC nyingine kuifikia kupitia Wi-Fi moja, tumia IP Address ya computer inayotumika kama server.
+                    </p>
+
+
+                    <div class="comparison-grid">
+
+                        <div class="address-card">
+
+                            <span class="address-label">
+                            LOCALHOST
+                        </span>
+
+                            <code>
+                            127.0.0.1:8000
+                        </code>
+
+                            <p data-i18n="localhostCard">
+                                Inatumika ndani ya computer hiyo hiyo.
+                            </p>
+
+                        </div>
+
+
+                        <div class="address-card featured-address">
+
+                            <span class="address-label">
+                            NETWORK IP
+                        </span>
+
+                            <code>
+                            192.168.1.10:8000
+                        </code>
+
+                            <p data-i18n="networkIPCard">
+                                Inaweza kutumiwa na kifaa kingine kwenye network inayoruhusu connection.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <h3 data-i18n="ipStep1Title">
+                        Hatua ya 1 — Tafuta IP Address ya PC
+                    </h3>
+
+                    <p data-i18n="ipStep1">
+                        Fungua PowerShell au Command Prompt kwenye PC inayoendesha chatbot.
+                    </p>
+
+
+                    <div class="code-window docs-terminal">
+
+                        <div class="window-bar">
+
+                            <span class="window-dot red"></span>
+                            <span class="window-dot yellow"></span>
+                            <span class="window-dot green"></span>
+
+                            <b>PowerShell</b>
+
+                            <button type="button" class="copy-window" data-copy="ipconfig" data-i18n="copy">
+                            Copy
+                        </button>
+
+                        </div>
+
+
+                        <pre><code><span class="prompt">PS C:\&gt;</span> ipconfig
+
+IPv4 Address . . . . . . . . . . : <span class="string">192.168.1.10</span></code></pre>
+                    </div>
+
+
+                    <p data-i18n="ipAddressNote">
+                        Tafuta sehemu ya <strong>IPv4 Address</strong>. Mfano unaweza kuwa <code>192.168.1.10</code>.
+                    </p>
+
+
+                    <h3 data-i18n="ipStep2Title">
+                        Hatua ya 2 — Anzisha server kwenye network
+                    </h3>
+
+                    <p data-i18n="ipStep2">
+                        Server inapaswa kusikiliza network interface badala ya localhost pekee.
+                    </p>
+
+
+                    <div class="code-window docs-terminal">
+
+                        <pre><code><span class="prompt">PS C:\my-project&gt;</span> uvicorn main:app --host 0.0.0.0 --port 8000</code></pre>
+
+                    </div>
+
+
+                    <div class="note">
+
+                        <strong data-i18n="hostMeaning">
+                        --host 0.0.0.0:
+                    </strong>
+
+                        <span data-i18n="hostMeaningText">
+                        Inafanya server isikilize interfaces za network
+                        za computer badala ya kuifunga kwenye
+                        127.0.0.1 pekee.
+                    </span>
+
+                    </div>
+
+
+                    <h3 data-i18n="ipStep3Title">
+                        Hatua ya 3 — Fungua chatbot kwenye simu
+                    </h3>
+
+                    <p data-i18n="ipStep3">
+                        Kama PC yako ina IP Address
+                        <code>192.168.1.10</code> na server iko port
+                        <code>8000</code>, kwenye browser ya simu fungua:
+                    </p>
+
+
+                    <div class="url-display">
+
+                        <span>http://</span>
+                        <strong>192.168.1.10:8000</strong>
+
+                        <button type="button" data-copy="http://192.168.1.10:8000" data-i18n="copy">
+                        Copy
+                    </button>
+
+                    </div>
+
+
+                    <h3 data-i18n="ipStep4Title">
+                        Hatua ya 4 — Tumia Room Code ile ile
+                    </h3>
+
+                    <p data-i18n="ipStep4">
+                        Baada ya simu kufungua chatbot, weka Room Code inayotumiwa na PC. Kwa mfano:
+                    </p>
+
+
+                    <div class="room-flow">
+
+                        <div>
+                            <span>PC</span>
+                            <code>192.168.1.10:8000</code>
+                            <small>Room 1234</small>
+                        </div>
+
+                        <span class="room-arrow">⇄</span>
+
+                        <div>
+                            <span>PHONE</span>
+                            <code>192.168.1.10:8000</code>
+                            <small>Room 1234</small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="note note-blue">
+
+                        <strong data-i18n="sameNetwork">
+                        Network:
+                    </strong>
+
+                        <span data-i18n="sameNetworkText">
+                        Kwa local-network setup, hakikisha vifaa
+                        vinaweza kufikia PC server kupitia network
+                        inayotumika. Wi-Fi moja mara nyingi hutumika
+                        kwa setup ya ndani, lakini router/access point
+                        inaweza kuwa na client isolation au firewall
+                        inayozuia vifaa kuwasiliana.
+                    </span>
+
+                    </div>
+
+
+                    <div class="warning-card">
+
+                        <strong data-i18n="securityTitle">
+                        Security note
+                    </strong>
+
+                        <p data-i18n="securityText">
+                            Usifungue server kwenye public internet bila authentication, access control na security configuration inayofaa. Mfano huu ni wa local-network development/testing.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= LIBRARY ================= -->
+                <section class="docs-section" id="library">
+
+                    <span class="section-number">05</span>
+
+                    <h2 data-i18n="libraryTitle">
+                        Tan_language Library
+                    </h2>
+
+                    <p data-i18n="libraryDescription">
+                        Tan_language ni Python library inayotoa translation tools bila kuhitaji kuendesha web server. Python import name ni tll.
+                    </p>
+
+
+                    <div class="code-window docs-terminal">
+
+                        <div class="window-bar">
+
+                            <b>translate.py</b>
+
+                            <button type="button" class="copy-window" data-copy="from tll import Translator&#10;&#10;translator = Translator.from_bundled_dataset('suk')&#10;result = translator.translate('mwalimu', source='suk', target='sw')&#10;print(result)" data-i18n="copy">
+                            Copy
+                        </button>
+
+                        </div>
+
+
+                        <pre><code><span class="keyword">from</span> tll <span class="keyword">import</span> Translator
+translator = Translator.from_bundled_dataset(<span class="string">'suk'</span>)
+
+result = translator.translate( <span class="string">'mwalimu'</span>,
+source=<span class="string">'suk'</span>,
+target=<span class="string">'sw'</span>
+)
+
+print(result)</code></pre>
+                    </div>
+
+
+                    <div class="info-grid">
+
+                        <div>
+
+                            <b>CLI</b>
+
+                            <p>
+                                <code>
+                                tan-language translate --from suk --to sw mwalimu
+                            </code>
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <b data-i18n="whatItDoes">
+                            Inafanya nini?
+                        </b>
+
+                            <p data-i18n="libraryDoes">
+                                Inasoma dataset iliyobundled na kutafsiri maneno au sentensi bila backend.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= CHATBOT ================= -->
+                <section class="docs-section" id="chatbot">
+
+                    <span class="section-number">06</span>
+
+                    <h2 data-i18n="chatbotTitle">
+                        Tan_lang_chatbot
+                    </h2>
+
+                    <p data-i18n="chatbotDescription">
+                        Tan_lang_chatbot ni application kamili yenye backend, frontend, translation system, voice interaction na Room-based communication.
+                    </p>
+
+
+                    <div class="feature-list">
+
+                        <div>
+
+                            <span>01</span>
+
+                            <div>
+
+                                <b data-i18n="featureInstall">
+                                Install once
+                            </b>
+
+                                <p data-i18n="featureInstallText">
+                                    Dependencies zinaweza kusakinishwa kupitia pip.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>02</span>
+
+                            <div>
+
+                                <b data-i18n="featureRun">
+                                Run command
+                            </b>
+
+                                <p>
+                                    <code>tan-lang-chatbot</code>
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>03</span>
+
+                            <div>
+
+                                <b data-i18n="featureRoom">
+                                Join Room
+                            </b>
+
+                                <p data-i18n="featureRoomText">
+                                    Vifaa vinaweza kutumia Room Code inayofanana.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>04</span>
+
+                            <div>
+
+                                <b data-i18n="featureVoice">
+                                Voice
+                            </b>
+
+                                <p data-i18n="featureVoiceText">
+                                    Mtumiaji anaweza kutumia microphone kulingana na browser na configuration ya application.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="note note-blue">
+
+                        <strong>API token:</strong>
+
+                        <span data-i18n="tokenText">
+                        Local dataset functionality inaweza kufanya kazi
+                        bila online AI token. Online AI fallback ikiwashwa
+                        inaweza kuhitaji token iliyowekwa kwenye .env.
+                    </span>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= COMMANDS ================= -->
+                <section class="docs-section" id="commands">
+
+                    <span class="section-number">07</span>
+
+                    <h2 data-i18n="commandsTitle">
+                        Commands Muhimu
+                    </h2>
+
+
+                    <div class="command-table">
+
+                        <div>
+                            <code>python --version</code>
+                            <span data-i18n="cmdPython">
+                            Kuangalia Python version
+                        </span>
+                        </div>
+
+                        <div>
+                            <code>python -m pip install Tan_language</code>
+                            <span data-i18n="cmdInstallLibrary">
+                            Kusakinisha library
+                        </span>
+                        </div>
+
+                        <div>
+                            <code>python -m pip install Tan_lang_chatbot</code>
+                            <span data-i18n="cmdInstallChatbot">
+                            Kusakinisha chatbot
+                        </span>
+                        </div>
+
+                        <div>
+                            <code>python -m pip install --upgrade Tan_lang_chatbot</code>
+                            <span data-i18n="cmdUpdate">
+                            Ku-update chatbot
+                        </span>
+                        </div>
+
+                        <div>
+                            <code>tan-language --help</code>
+                            <span data-i18n="cmdHelp">
+                            Kuona library commands
+                        </span>
+                        </div>
+
+                        <div>
+                            <code>Tan-lang-chatbot</code>
+                            <span data-i18n="cmdRun">
+                            Kuanzisha chatbot
+                        </span>
+                        </div>
+
+                        <div>
+                            <code>ipconfig</code>
+                            <span data-i18n="cmdIP">
+                            Kuangalia IP Address
+                        </span>
+                        </div>
+
+                        <div>
+                            <code>uvicorn main:app --host 0.0.0.0 --port 8000</code>
+                            <span data-i18n="cmdHost">
+                            Ku-run server kwenye network interface
+                        </span>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= TROUBLESHOOTING ================= -->
+                <section class="docs-section" id="troubleshooting">
+
+                    <span class="section-number">08</span>
+
+                    <h2 data-i18n="troubleshootingTitle">
+                        Troubleshooting
+                    </h2>
+
+
+                    <details>
+
+                        <summary data-i18n="troublePip">
+                            Pip haisomi command?
+                        </summary>
+
+                        <p data-i18n="troublePipText">
+                            Tumia python -m pip badala ya pip. Baada ya installation unaweza kufunga na kufungua Terminal mpya.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary data-i18n="troubleLocalhost">
+                            Simu haiwezi kufungua 127.0.0.1?
+                        </summary>
+
+                        <p data-i18n="troubleLocalhostText">
+                            Hii ni kawaida. 127.0.0.1 ni localhost ya kifaa kinachofungua address hiyo. Tumia IP Address ya PC server, kwa mfano 192.168.1.10:8000.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary data-i18n="troubleIP">
+                            IP Address haifanyi kazi?
+                        </summary>
+
+                        <p data-i18n="troubleIPText">
+                            Hakikisha server imesikiliza 0.0.0.0, vifaa vinaweza kuwasiliana kwenye network, port 8000 haijazuiwa na firewall, na IP Address ni ya PC inayotumia server.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary data-i18n="troubleRoom">
+                            Vifaa vina IP lakini Room haionyeshi messages?
+                        </summary>
+
+                        <p data-i18n="troubleRoomText">
+                            Hakikisha vifaa vimeingia kwenye Room Code inayofanana na backend yako inaruhusu communication ya Room. Pia hakikisha WebSocket/API endpoints zinazotumiwa na application hazizuiwi.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary data-i18n="troublePort">
+                            Port 8000 tayari inatumika?
+                        </summary>
+
+                        <p data-i18n="troublePortText">
+                            Funga server nyingine inayotumia port hiyo au tumia port tofauti, kwa mfano: uvicorn main:app --host 0.0.0.0 --port 8001
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary data-i18n="troubleFirewall">
+                            Windows Firewall inazuia connection?
+                        </summary>
+
+                        <p data-i18n="troubleFirewallText">
+                            Angalia Windows Defender Firewall na ruhusu application/server yako kwenye private network ikiwa ni salama kufanya hivyo. Usifungue ports kwa public access bila security configuration.
+                        </p>
+
+                    </details>
+
+                </section>
+
+            </article>
+
+        </div>
+
+    </main>
+
+
+    <footer class="docs-footer">
+
+        🇹🇿
+
+        <b>LocalLang Tanzania AI</b> ·
+
+        <span data-i18n="footerDocumentation">
+        Official Documentation
+    </span> · 2026
+
+    </footer>
+
+
+    <script src="/static/docs.js"></script>
+
+
+</body>
+
+</html>
