@@ -1,9 +1,9 @@
 services:
   - type: web
-    name: locallang-api
+    name: locallang-tanzania
     runtime: python
+    plan: free
     rootDir: website
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --app-dir backend --host 0.0.0.0 --port $PORT
     healthCheckPath: /api/health
-    numInstances: 1
