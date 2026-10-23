@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: locallang-tanzania
+    name: Tanlingo
     runtime: python
     plan: free
     rootDir: website
