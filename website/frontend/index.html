@@ -4,19 +4,26 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tan_lang_chatbot — Tanzania Local Language Translator</title>
+    <title>Tanlingo — Mtafsiri wa lugha za Tanzania</title>
     <meta name="description" content="Tafsiri ya papo kwa papo kati ya Sukuma, Kihaya/Ruhaya, Kinyakyusa na Kiswahili kwa sauti au maandishi.">
-    <link rel="icon" type="image/png" href="/logo.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg+xml" href="/tanlingo.svg?v=5">
+    <link rel="stylesheet" href="styles.css?v=tanlingo">
 </head>
 
 <body>
+    <section class="splash-screen" id="chatbot-splash" aria-label="Tanlingo inafunguka">
+        <div class="splash-content">
+            <img class="splash-logo" src="/tanlingo-wordmark.svg?v=8" alt="Tanlingo">
+            <p class="splash-guide">Mawasiliano ya lugha za Tanzania, kwa urahisi.</p>
+        </div>
+    </section>
+
     <header class="hero">
         <div class="wrap hero-inner">
             <div>
                 <div class="brand-lockup">
-                    <img class="brand-logo" src="/logo.png" alt="Tan Tanzania Local Language logo">
-                    <span class="pill"><i class="dot"></i> Tan_lang_chatbot</span>
+                    <img class="brand-logo" src="/tanlingo-wordmark.svg?v=8" alt="Tanlingo">
+                    <span class="pill"><i class="dot"></i> CHATBOT</span>
                 </div>
                 <h1 data-i18n="tagline">Mtafsiri wa lugha za asili za Tanzania</h1>
                 <p class="lead" data-i18n="subtitle">
@@ -66,7 +73,7 @@
         <section class="card translation-workspace">
             <div class="conversation-panel-head">
                 <div>
-                    <p class="label" data-i18n="conversationViews">Muonekano wa mazungumzo</p>
+                    <p class="label" data-i18n="conversationRoom">Room ya mazungumzo</p>
                     <h2 data-i18n="conversationViews">Muonekano wa mazungumzo</h2>
                 </div>
                 <div class="conversation-head-actions">
@@ -77,7 +84,7 @@
             <div class="conversation-views">
                 <div class="view" id="view-main" data-theme="light">
                     <div class="view-head">
-                        <strong data-i18n="conversationViews">Muonekano wa mazungumzo</strong>
+                        <strong data-i18n="liveConversation">Mazungumzo ya moja kwa moja</strong>
                         <div class="theme-toggle">
                             <button type="button" data-view="main" data-theme="light" class="small active" data-i18n="light">Mwanga</button>
                             <button type="button" data-view="main" data-theme="dark" class="small" data-i18n="dark">Giza</button>
@@ -236,7 +243,15 @@
         </section>
     </main>
 
-    <footer>LocalLang AI · Sukuma · Kihaya/Ruhaya · Kinyakyusa · Kiswahili</footer>
+    <footer><img src="/tanlingo-wordmark.svg?v=8" alt="Tanlingo"> · Sukuma · Kihaya/Ruhaya · Kinyakyusa · Kiswahili</footer>
+    <script>
+        window.setTimeout(() => {
+            const splash = document.getElementById("chatbot-splash");
+            if (!splash) return;
+            splash.classList.add("splash-hidden");
+            window.setTimeout(() => splash.remove(), 700);
+        }, 1200);
+    </script>
     <script src="/static/app.js"></script>
     <script>
         // Minimal fallback: if main app failed to initialize, attach simple handlers so UI remains usable.

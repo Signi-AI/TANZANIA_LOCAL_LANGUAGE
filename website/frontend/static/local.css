@@ -62,6 +62,21 @@ select {
     font-weight: 900
 }
 
+.brand-logo-img {
+    display: block;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    object-fit: contain
+}
+
+.brand-wordmark {
+    display: block;
+    width: 156px;
+    height: 45px;
+    object-fit: contain
+}
+
 .navbar nav {
     display: flex;
     align-items: center;

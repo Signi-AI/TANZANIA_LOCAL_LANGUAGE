@@ -326,8 +326,8 @@ select {
 }
 
 .brand-logo {
-    width: 42px;
-    height: 42px;
+    width: clamp(128px, 39vw, 160px);
+    height: 46px;
     object-fit: contain;
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .2));
 }
@@ -1803,6 +1803,12 @@ body[data-theme="dark"] .translation-workspace {
     gap: 8px;
 }
 
+footer img {
+    width: 140px;
+    height: auto;
+    flex: 0 0 auto;
+}
+
 .settings-reopen,
 .settings-heading {
     cursor: pointer;
@@ -2568,4 +2574,180 @@ body:not([data-theme="dark"]) .panel[data-role="doctor"] {
 
 footer {
     border-top-color: rgba(99, 164, 255, .2);
+}
+
+/* Tanlingo brand and conversation workspace */
+.brand-lockup {
+    gap: 12px;
+}
+
+.brand-logo {
+    width: clamp(150px, 17vw, 190px);
+    height: 55px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .2));
+}
+
+.pill {
+    letter-spacing: .11em;
+}
+
+.splash-screen {
+    z-index: 10000;
+}
+
+#chatbot-splash .splash-content {
+    max-width: 430px;
+    padding: 38px 28px;
+}
+
+#chatbot-splash .splash-logo {
+    width: min(390px, 80vw);
+    height: auto;
+    max-height: 112px;
+    margin-bottom: 12px;
+    border-radius: 0;
+}
+
+#chatbot-splash .splash-title {
+    margin: 0;
+}
+
+#chatbot-splash .splash-guide {
+    margin: 12px 0 0;
+}
+
+.room-bar {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr) auto;
+    gap: 20px;
+}
+
+.room-controls {
+    display: grid;
+    grid-template-columns: minmax(100px, .8fr) minmax(130px, 1fr) auto;
+    align-items: center;
+    gap: 9px;
+}
+
+.room-controls input,
+.room-controls select {
+    width: 100%;
+    min-width: 0;
+}
+
+.room-controls .switch {
+    grid-column: 1 / -1;
+    justify-self: start;
+}
+
+.translation-workspace {
+    grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
+    column-gap: 24px;
+}
+
+.conversation-panel-head h2 {
+    letter-spacing: -.035em;
+}
+
+.translation-workspace .view {
+    border: 1px solid var(--border);
+    border-radius: 18px;
+}
+
+.translation-workspace .conversation {
+    border-radius: 14px;
+}
+
+.composer-dock {
+    gap: 12px;
+}
+
+.composer {
+    box-shadow: 0 10px 26px -24px rgba(5, 54, 57, .7);
+}
+
+.composer-field .row input {
+    min-width: 0;
+}
+
+.hero .brand-lockup .pill {
+    max-width: none;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+@media (max-width: 900px) {
+    .room-bar {
+        grid-template-columns: 1fr;
+    }
+
+    .room-controls {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+    }
+
+    .room-status {
+        justify-self: start;
+    }
+}
+
+@media (max-width: 680px) {
+    .brand-logo {
+        width: clamp(128px, 39vw, 160px);
+        height: 46px;
+    }
+
+    .room-controls {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .room-controls button.primary {
+        grid-column: 1 / -1;
+    }
+
+    .room-controls .switch {
+        grid-column: 1 / -1;
+        justify-self: stretch;
+        justify-content: flex-start;
+        white-space: normal;
+    }
+
+    .translation-workspace .view {
+        min-height: 300px;
+    }
+
+    .translation-workspace .conversation {
+        min-height: 220px;
+    }
+
+    .composer-controls {
+        gap: 10px;
+    }
+
+    .composer .mic {
+        flex-basis: 46px;
+        width: 46px;
+        height: 46px;
+    }
+
+    footer {
+        flex-wrap: wrap;
+        padding: 20px 12px;
+        text-align: center;
+    }
+
+    footer img {
+        width: 128px;
+    }
+}
+
+@media (max-width: 420px) {
+    .brand-logo {
+        width: 128px;
+        height: 38px;
+    }
 }

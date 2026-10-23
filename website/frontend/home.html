@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="LocalLang Tanzania AI — mawasiliano na teknolojia kwa lugha za Tanzania.">
-    <title>LocalLang Tanzania AI</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Tanlingo — mawasiliano na teknolojia kwa lugha za Tanzania.">
+    <title>Tanlingo</title>
+    <link rel="icon" type="image/svg+xml" href="/tanlingo.svg?v=5">
+    <link rel="stylesheet" href="styles.css?v=tanlingo">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -425,12 +426,12 @@
         }
         
         .splash-logo {
-            width: clamp(86px, 20vw, 124px);
-            height: clamp(86px, 20vw, 124px);
+            width: min(390px, 76vw);
+            height: auto;
             margin: 0 auto 22px;
             display: block;
             object-fit: contain;
-            border-radius: 28px;
+            border-radius: 0;
             filter: drop-shadow(0 18px 35px rgba(0, 0, 0, .35));
             animation: splashLogo 2.5s ease-in-out infinite;
         }
@@ -578,10 +579,10 @@
                 padding-right: 14px;
                 gap: 8px;
             }
-            header a img {
-                width: 48px !important;
-                height: 48px !important;
-                border-radius: 12px;
+            header a .brand-wordmark {
+                width: clamp(130px, 40vw, 154px) !important;
+                height: 40px !important;
+                border-radius: 0;
             }
             #themeBtn,
             #mobileMenu {
@@ -710,9 +711,9 @@
                 border-radius: 24px;
             }
             .splash-logo {
-                width: 82px;
-                height: 82px;
-                border-radius: 20px;
+                width: min(300px, 78vw);
+                height: auto;
+                border-radius: 0;
             }
         }
         /* Touch devices: remove hover movement that can feel jumpy */
@@ -887,10 +888,10 @@
                 padding-left: 8px;
                 padding-right: 8px;
             }
-            header a img {
-                width: clamp(38px, 11vw, 48px) !important;
-                height: clamp(38px, 11vw, 48px) !important;
-                border-radius: 10px;
+            header a .brand-wordmark {
+                width: clamp(120px, 39vw, 150px) !important;
+                height: 38px !important;
+                border-radius: 0;
             }
             #siteNav {
                 gap: 0;
@@ -939,10 +940,10 @@
                 padding-left: 5px;
                 padding-right: 5px;
             }
-            header a img {
-                width: 34px !important;
-                height: 34px !important;
-                border-radius: 8px;
+            header a .brand-wordmark {
+                width: 112px !important;
+                height: 32px !important;
+                border-radius: 0;
             }
             #siteNav .nav-link {
                 font-size: clamp(6.5px, 2.1vw, 9px);
@@ -970,10 +971,9 @@
 </head>
 
 <body class="bg-white text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-white">
-    <section class="splash-screen" id="splash-screen" aria-label="Tan_lang_chatbot loading">
+    <section class="splash-screen" id="splash-screen" aria-label="Tanlingo inafunguka">
         <div class="splash-content">
-            <img class="splash-logo" src="/logo.png" alt="Tan Tanzania Local Language">
-            <p class="splash-title">Tan_lang_chatbot</p>
+            <img class="splash-logo" src="/tanlingo-wordmark.svg?v=8" alt="Tanlingo">
             <div class="splash-guide" aria-live="polite">
                 <span>Chagua role yako</span>
                 <span>Weka lugha ya mazungumzo</span>
@@ -993,7 +993,7 @@
     <header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/90">
         <div class="mx-auto flex min-h-[72px] max-w-7xl items-center gap-4 px-5 sm:px-8">
             <a href="#home" id="logoLink" class="flex items-center gap-3 shrink-0 cursor-pointer" title="Bonyeza au Right-Click kuona Splash Screen">
-                <img src="image/logo.jpg" alt="Profile Image" class="h-20 w-20 rounded-xl object-cover">
+                <img src="/tanlingo-wordmark.svg?v=8" alt="Tanlingo" class="brand-wordmark h-11 w-[154px] object-contain">
             </a>
 
             <!-- Main Navigation -->
@@ -1090,7 +1090,7 @@
                         <span class="bg-gradient-to-r from-rose-500 via-violet-500 to-blue-500 bg-clip-text text-transparent" data-i18n="hero.title2">lugha za asili Tanzania.</span>
                     </h1>
                     <p class="mt-7 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg dark:text-slate-300" data-i18n="hero.description">
-                        LocalLang Tanzania AI inaleta tafsiri, mazungumzo, sauti na teknolojia ya lugha karibu na jamii za Tanzania.
+                        Tanlingo inaleta tafsiri, mazungumzo, sauti na teknolojia ya lugha karibu na jamii za Tanzania.
                     </p>
                     <div class="mt-8 flex flex-wrap gap-3">
                         <a href="#try-system" class="theme-cta rounded-2xl bg-slate-950 px-6 py-3.5 text-sm font-extrabold text-white shadow-lg transition hover:-translate-y-1 dark:bg-white dark:text-slate-950" data-i18n="hero.ctaPrimary">Jaribu mfumo →</a>
@@ -1257,7 +1257,7 @@
         <div class="mx-auto max-w-7xl">
             <div class="grid gap-10 md:grid-cols-[1.25fr_.9fr_.9fr]">
                 <div>
-                    <div class="font-bold text-white">🇹🇿 LocalLang Tanzania AI</div>
+                    <div class="font-bold text-white"><img src="/tanlingo-wordmark.svg?v=8" alt="Tanlingo" width="154" height="44" class="inline-block align-middle"></div>
                     <p class="mt-4 max-w-md text-sm leading-7 text-slate-400" data-i18n="footer.description">
                         Teknolojia ya lugha inayounganisha watu, inalinda urithi wa lugha, na kurahisisha upatikanaji wa maarifa Tanzania.
                     </p>
@@ -1277,7 +1277,7 @@
             </div>
             <div class="mt-10 flex flex-col justify-between gap-3 border-t border-slate-800 pt-5 text-xs text-slate-500 sm:flex-row">
                 <span data-i18n="footer.motto">Akili bandia kwa lugha za Tanzania · Umoja kupitia teknolojia</span>
-                <span class="font-semibold text-slate-400">© 2026 LocalLang Tanzania AI</span>
+                <span class="font-semibold text-slate-400">© 2026 Tanlingo</span>
             </div>
         </div>
     </footer>
@@ -1410,13 +1410,9 @@
 
                         <img
                             class="splash-logo"
-                            src="/logo.png"
-                            alt="Tan Tanzania Local Language"
+                            src="/tanlingo-wordmark.svg?v=8"
+                            alt="Nembo ya Tanlingo"
                         >
-
-                        <p class="splash-title">
-                            Tan_lang_chatbot
-                        </p>
 
                         <div class="splash-guide">
                             <span>Chagua role yako</span>

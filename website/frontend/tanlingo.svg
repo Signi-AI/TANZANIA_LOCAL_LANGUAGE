@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">Tanlingo</title>
+  <defs>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#42b76a"/>
+      <stop offset="1" stop-color="#08723a"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#39a7e8"/>
+      <stop offset="1" stop-color="#0756a4"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ffe36b"/>
+      <stop offset=".55" stop-color="#f4c542"/>
+      <stop offset="1" stop-color="#d99b16"/>
+    </linearGradient>
+    <linearGradient id="black" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#33363b"/>
+      <stop offset="1" stop-color="#101216"/>
+    </linearGradient>
+    <clipPath id="mark">
+      <path d="M22 22c1 16 9 25 25 27 11 1 19 6 23 15v38c11 0 18-8 18-19V62c0-13-8-22-23-27-12-4-24 0-34-4-5-2-8-5-9-9z"/>
+      <path d="M88 42h20c0 10-7 18-17 18h-5c3-5 4-12 2-18z"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#mark)">
+    <rect width="128" height="128" fill="url(#green)"/>
+    <path d="M16 128 128 16v112z" fill="url(#blue)"/>
+    <path d="M0 112 112 0h6L0 118z" fill="url(#gold)"/>
+    <path d="M0 118 118 0l10 10L10 128z" fill="url(#black)"/>
+    <path d="m10 128 118-118v6L16 128z" fill="url(#gold)"/>
+  </g>
+  <path d="M88 42h20c0 10-7 18-17 18h-5c3-5 4-12 2-18z" fill="url(#black)"/>
+</svg>

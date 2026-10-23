@@ -81,6 +81,20 @@ NAVIGATION
 
 .docs-nav .brand {
     color: var(--docs-text);
+    gap: 11px;
+    min-width: max-content;
+}
+
+.docs-brand-logo {
+    display: block;
+    width: 156px;
+    height: 45px;
+    object-fit: contain;
+}
+
+.docs-brand-name {
+    font-weight: 800;
+    letter-spacing: -.03em;
 }
 
 .docs-nav #docsNav a {
@@ -970,6 +984,13 @@ FOOTER
     color: var(--docs-text);
 }
 
+.docs-footer-logo {
+    width: 142px;
+    height: 41px;
+    margin: 0 7px -10px 0;
+    object-fit: contain;
+}
+
 
 /* =========================================================
 LIGHT MODE
@@ -1186,5 +1207,167 @@ RESPONSIVE
         animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
         transition-duration: .01ms !important;
+    }
+}
+
+.docs-page,
+.docs-page button,
+.docs-page h1,
+.docs-page h2,
+.docs-page h3,
+.docs-page nav a,
+.docs-sidebar>span,
+.docs-sidebar a b,
+.address-label,
+.room-flow>div>span,
+.feature-list>div>span,
+.docs-section summary {
+    font-family: Inter, "Segoe UI", Arial, sans-serif !important;
+}
+
+.docs-nav {
+    gap: 12px;
+}
+
+.docs-nav #docsNav {
+    flex: 1 1 auto;
+    min-width: 0;
+    justify-content: center;
+    gap: 0;
+    margin-left: 0;
+}
+
+.docs-nav #docsNav a {
+    padding: 9px 9px;
+    font-size: .78rem;
+    white-space: nowrap;
+}
+
+.docs-nav .nav-tools {
+    gap: 7px;
+}
+
+.docs-hero {
+    padding: 92px 0 72px;
+}
+
+.docs-hero-grid {
+    gap: clamp(32px, 5vw, 64px);
+}
+
+.docs-hero h1 {
+    max-width: 680px;
+    font-size: clamp(2.6rem, 5.2vw, 4.35rem);
+    line-height: 1.04;
+    letter-spacing: -.045em;
+}
+
+.docs-kicker,
+.section-number,
+.docs-sidebar>span,
+.docs-sidebar a b,
+.address-label,
+.room-flow>div>span,
+.feature-list>div>span {
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    letter-spacing: .08em;
+}
+
+.docs-layout {
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 48px);
+}
+
+.docs-layout > * {
+    min-width: 0;
+}
+
+.docs-section {
+    padding: clamp(24px, 3vw, 34px);
+    border-radius: 18px;
+}
+
+.install-cards,
+.info-grid,
+.comparison-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.install-card,
+.info-grid>div {
+    min-width: 0;
+}
+
+.docs-section h2 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    line-height: 1.15;
+    letter-spacing: -.035em;
+}
+
+.docs-sidebar a {
+    border-radius: 8px;
+}
+
+.docs-sidebar a:hover {
+    transform: translateX(2px);
+}
+
+@media (max-width: 1100px) {
+    .docs-nav {
+        border-radius: 22px;
+    }
+}
+
+@media (max-width: 850px) {
+    .docs-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .docs-sidebar {
+        position: static;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        border-bottom: 1px solid var(--docs-line);
+    }
+
+    .docs-sidebar>span {
+        grid-column: 1 / -1;
+    }
+
+    .install-cards,
+    .info-grid,
+    .comparison-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .docs-brand-logo {
+        width: 132px;
+        height: 38px;
+    }
+
+    .docs-brand-name {
+        font-size: .9rem;
+    }
+
+    .docs-nav {
+        gap: 8px;
+        padding: 8px 10px;
+    }
+
+    .docs-nav .start {
+        padding: 9px 10px;
+        font-size: .72rem;
+        white-space: nowrap;
+    }
+
+    .docs-hero h1 {
+        font-size: clamp(2.45rem, 11vw, 3.25rem);
+        line-height: 1.02;
+    }
+
+    .docs-hero-copy>p {
+        font-size: .98rem;
+        line-height: 1.7;
     }
 }
