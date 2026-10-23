@@ -16,6 +16,8 @@ const I18N = {
         doctor: "Daktari",
         patientLang: "Lugha ya mgonjwa",
         uiLang: "Lugha ya tovuti",
+        settings: "Mipangilio",
+        preferences: "Lugha na mwonekano",
         deviceCommunication: "Mawasiliano ya vifaa viwili",
         conversationRoom: "Room ya mazungumzo",
         roomHint: "Tumia code hii kwenye simu na PC zote zilizo kwenye Wi-Fi moja.",
@@ -102,6 +104,8 @@ const I18N = {
         doctor: "Doctor",
         patientLang: "Patient language",
         uiLang: "Site language",
+        settings: "Settings",
+        preferences: "Language & appearance",
         deviceCommunication: "Two-device communication",
         conversationRoom: "Conversation room",
         roomHint: "Use this code on the phone and PC connected to the same Wi-Fi.",
@@ -212,7 +216,7 @@ const I18N = {
 };
 
 const state = {
-    ui: localStorage.getItem("ll_ui") || "sw",
+    ui: localStorage.getItem("locallang-ui") || localStorage.getItem("ll_ui") || "sw",
     patientLang: localStorage.getItem("ll_lang") || "Ruhaya",
     sideLanguages: {
         patient: localStorage.getItem("ll_lang_patient") || localStorage.getItem("ll_lang") || "Ruhaya",
@@ -231,7 +235,7 @@ const state = {
         patient: localStorage.getItem("ll_gender_patient") || "auto",
         doctor: localStorage.getItem("ll_gender_doctor") || "auto",
     },
-    theme: localStorage.getItem('ll_theme') || 'light',
+    theme: localStorage.getItem("locallang-theme") || localStorage.getItem("ll_theme") || "light",
 };
 
 const t = (key) => I18N[state.ui][key] || key;
@@ -710,6 +714,17 @@ function setConversationStarted(started) {
     if (workspace) workspace.classList.toggle("conversation-started", started);
 }
 
+function setSettingsCollapsed(collapsed) {
+    const workspace = document.querySelector(".translation-workspace");
+    if (!workspace) return;
+    workspace.classList.toggle("settings-collapsed", collapsed);
+    document.querySelectorAll(".settings-heading, .settings-reopen").forEach((button) => {
+        button.setAttribute("aria-expanded", String(!collapsed));
+    });
+}
+
+let responsiveSettingsCollapse = false;
+
 function setActivityIndicator(side, status) {
     const conversationBox = $("#conversation-main");
     if (!conversationBox) return;
@@ -1018,7 +1033,11 @@ $$("[data-send]").forEach((btn) => {
   };
   input.oninput = () => {
     const hasText = input.value.trim().length > 0;
-    if (hasText) setConversationStarted(true);
+    if (hasText) {
+      setConversationStarted(true);
+      setSettingsCollapsed(true);
+      responsiveSettingsCollapse = false;
+    }
     if (activityTimers[side]) clearTimeout(activityTimers[side]);
     sendActivity(hasText ? "typing" : "idle");
     if (hasText) {
@@ -1027,12 +1046,17 @@ $$("[data-send]").forEach((btn) => {
   };
 });
 
+function applyUILanguage(language, persist = true) {
+  state.ui = language;
+  if (persist) {
+    localStorage.setItem("ll_ui", language);
+    localStorage.setItem("locallang-ui", language);
+  }
+  applyI18n();
+}
+
 $$("[data-ui]").forEach((btn) => {
-  btn.onclick = () => {
-    state.ui = btn.dataset.ui;
-    localStorage.setItem("ll_ui", state.ui);
-    applyI18n();
-  };
+  btn.onclick = () => applyUILanguage(btn.dataset.ui);
 });
 
 $$(".chip").forEach((chip) => {
@@ -1151,16 +1175,28 @@ const translationWorkspace = document.querySelector(".translation-workspace");
 setConversationStarted(Boolean(document.querySelector("#conversation-main .bubble")));
 const settingsToggleButtons = document.querySelectorAll(".settings-heading, .settings-reopen");
 if (translationWorkspace && settingsToggleButtons.length) {
-    const setSettingsCollapsed = (collapsed) => {
-        translationWorkspace.classList.toggle("settings-collapsed", collapsed);
-        settingsToggleButtons.forEach((button) => {
-            button.setAttribute("aria-expanded", String(!collapsed));
-        });
-    };
+    const compactScreen = window.matchMedia("(max-width: 768px)");
+
+    if (compactScreen.matches) {
+        setSettingsCollapsed(true);
+        responsiveSettingsCollapse = true;
+    }
+
     settingsToggleButtons.forEach((button) => {
         button.onclick = () => {
             setSettingsCollapsed(!translationWorkspace.classList.contains("settings-collapsed"));
+            responsiveSettingsCollapse = false;
         };
+    });
+
+    compactScreen.addEventListener("change", ({ matches }) => {
+        if (matches && !translationWorkspace.classList.contains("settings-collapsed")) {
+            setSettingsCollapsed(true);
+            responsiveSettingsCollapse = true;
+        } else if (!matches && responsiveSettingsCollapse) {
+            setSettingsCollapsed(false);
+            responsiveSettingsCollapse = false;
+        }
     });
 }
 
@@ -1224,36 +1260,17 @@ const conversationMain = document.querySelector("#conversation-main");
 if (conversationMain) conversationMain.innerHTML = `<p class="muted center">${t("empty")}</p>`;
 seedConversationSample();
 
-// theme toggle handlers (per-view light/dark)
-Array.from(document.querySelectorAll('.theme-toggle .small')).forEach(btn => {
-  btn.onclick = () => {
-    const view = btn.dataset.view;
-    const theme = btn.dataset.theme;
-    const root = document.getElementById(`view-${view}`);
-    if (!root) return;
-    root.dataset.theme = theme;
-    localStorage.setItem(`ll_view_theme_${view}`, theme);
-    // update active state
-    Array.from(root.querySelectorAll('.theme-toggle .small')).forEach(b => b.classList.toggle('active', b === btn));
-  };
-});
-
-document.querySelectorAll('.view[data-theme]').forEach(root => {
-  const view = root.id.replace(/^view-/, "");
-  const savedTheme = localStorage.getItem(`ll_view_theme_${view}`);
-  if (!savedTheme) return;
-  root.dataset.theme = savedTheme;
-  root.querySelectorAll('.theme-toggle .small').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.theme === savedTheme);
-  });
-});
-
 // global theme toggle (applies to whole page)
-function applyTheme(theme) {
-  console.debug('[theme] applyTheme()', theme);
+function applyTheme(theme, persist = true) {
   document.body.setAttribute('data-theme', theme);
   state.theme = theme;
-  localStorage.setItem('ll_theme', theme);
+  if (persist) {
+    localStorage.setItem('ll_theme', theme);
+    localStorage.setItem('locallang-theme', theme);
+  }
+  document.querySelectorAll('.view[data-theme]').forEach((view) => {
+    view.dataset.theme = theme;
+  });
   const lightBtn = document.getElementById('global-theme-light');
   const darkBtn = document.getElementById('global-theme-dark');
   if (lightBtn && darkBtn) {
@@ -1264,8 +1281,17 @@ function applyTheme(theme) {
 
 const gLight = document.getElementById('global-theme-light');
 const gDark = document.getElementById('global-theme-dark');
-if (gLight) gLight.onclick = () => { console.debug('[theme] clicked light'); applyTheme('light'); };
-if (gDark) gDark.onclick = () => { console.debug('[theme] clicked dark'); applyTheme('dark'); };
+if (gLight) gLight.onclick = () => applyTheme('light');
+if (gDark) gDark.onclick = () => applyTheme('dark');
+
+window.addEventListener("storage", (event) => {
+  if (event.key === "locallang-ui" && (event.newValue === "sw" || event.newValue === "en")) {
+    applyUILanguage(event.newValue, false);
+  }
+  if (event.key === "locallang-theme" && (event.newValue === "light" || event.newValue === "dark")) {
+    applyTheme(event.newValue, false);
+  }
+});
 
 // apply saved theme on load
 console.debug('[theme] initial state.theme=', state.theme);

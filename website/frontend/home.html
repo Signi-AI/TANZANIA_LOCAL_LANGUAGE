@@ -7,7 +7,7 @@
     <meta name="description" content="Tanlingo — mawasiliano na teknolojia kwa lugha za Tanzania.">
     <title>Tanlingo</title>
     <link rel="icon" type="image/svg+xml" href="/tanlingo.svg?v=5">
-    <link rel="stylesheet" href="styles.css?v=tanlingo">
+    <link rel="stylesheet" href="styles.css?v=tanlingo-v8">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -168,6 +168,25 @@
         html.dark .site-footer,
         html.dark .site-footer * {
             color: #fff !important;
+        }
+
+        .site-footer-inner {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .site-footer-grid {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .site-footer-grid > section {
+            min-width: 0;
+        }
+
+        @media (min-width: 768px) {
+            .site-footer-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
         }
         
         #how .how-intro {
@@ -375,6 +394,35 @@
             max-width: 100%;
             height: auto;
         }
+
+        .hero-gradient-text {
+            background-image: linear-gradient(110deg, #15945b 0%, #53c98a 24%, #e9b936 49%, #1683bd 74%, #15945b 100%);
+            background-size: 240% 100%;
+            background-position: 0% 50%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent !important;
+            -webkit-text-fill-color: transparent;
+            animation: hero-gradient-flow 8s ease-in-out infinite;
+        }
+
+        .hero-gradient-rule {
+            background-image: linear-gradient(90deg, #15945b, #e9b936 52%, #1683bd);
+            background-size: 200% 100%;
+            animation: hero-gradient-flow 8s ease-in-out infinite;
+        }
+
+        @keyframes hero-gradient-flow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-gradient-text,
+            .hero-gradient-rule {
+                animation: none;
+            }
+        }
         /* Splash screen */
         
         .splash-screen {
@@ -386,7 +434,11 @@
             min-height: 100dvh;
             padding: 24px;
             overflow: hidden;
-            background: radial-gradient(circle at 20% 20%, rgba(244, 63, 94, .18), transparent 32%), radial-gradient(circle at 80% 25%, rgba(124, 58, 237, .20), transparent 34%), radial-gradient(circle at 50% 90%, rgba(14, 165, 233, .18), transparent 35%), #050816;
+            background:
+                radial-gradient(ellipse at 14% 18%, rgba(31, 174, 109, .28), transparent 36%),
+                radial-gradient(ellipse at 88% 20%, rgba(27, 109, 193, .3), transparent 37%),
+                radial-gradient(ellipse at 72% 88%, rgba(247, 201, 76, .17), transparent 35%),
+                linear-gradient(132deg, #031511 0%, #061c2b 48%, #071827 72%, #04120f 100%);
             transition: opacity .7s ease, visibility .7s ease;
         }
         
@@ -395,9 +447,12 @@
             position: absolute;
             width: min(680px, 85vw);
             aspect-ratio: 1;
-            border: 1px solid rgba(255, 255, 255, .12);
+            border: 1px solid rgba(139, 227, 203, .19);
             border-radius: 50%;
-            box-shadow: 0 0 0 55px rgba(255, 255, 255, .025), 0 0 0 110px rgba(255, 255, 255, .018);
+            box-shadow:
+                0 0 80px rgba(31, 174, 109, .1),
+                0 0 0 55px rgba(255, 255, 255, .025),
+                0 0 0 110px rgba(89, 217, 255, .018);
             animation: splashPulse 4s ease-in-out infinite;
         }
         
@@ -405,9 +460,11 @@
             content: "";
             position: absolute;
             inset: 0;
-            background-image: linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
-            background-size: 44px 44px;
-            mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+            background-image:
+                linear-gradient(rgba(219, 255, 245, .025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(219, 255, 245, .025) 1px, transparent 1px);
+            background-size: 52px 52px;
+            mask-image: radial-gradient(ellipse at center, #000 8%, transparent 76%);
             pointer-events: none;
         }
         
@@ -417,12 +474,25 @@
             width: min(520px, 100%);
             padding: clamp(28px, 6vw, 56px) clamp(22px, 6vw, 48px);
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, .13);
+            border: 1px solid rgba(194, 240, 226, .17);
             border-radius: 32px;
-            background: rgba(15, 23, 42, .58);
-            box-shadow: 0 30px 100px rgba(0, 0, 0, .45);
+            background: linear-gradient(150deg, rgba(15, 39, 49, .78), rgba(7, 23, 31, .72));
+            box-shadow:
+                0 34px 110px rgba(0, 0, 0, .48),
+                inset 0 1px 0 rgba(255, 255, 255, .09);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
+        }
+
+        .splash-content::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 12%;
+            width: 76%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #48d597 30%, #f7c94c 68%, #59d9ff, transparent);
+            opacity: .9;
         }
         
         .splash-logo {
@@ -432,7 +502,7 @@
             display: block;
             object-fit: contain;
             border-radius: 0;
-            filter: drop-shadow(0 18px 35px rgba(0, 0, 0, .35));
+            filter: drop-shadow(0 18px 35px rgba(0, 0, 0, .42)) drop-shadow(0 0 24px rgba(52, 211, 153, .12));
             animation: splashLogo 2.5s ease-in-out infinite;
         }
         
@@ -479,8 +549,8 @@
             width: 0;
             height: 100%;
             border-radius: inherit;
-            background: linear-gradient(90deg, #fb7185, #8b5cf6, #38bdf8);
-            box-shadow: 0 0 18px rgba(139, 92, 246, .65);
+            background: linear-gradient(90deg, #1fae6d 0%, #f7c94c 54%, #1b6dc1 100%);
+            box-shadow: 0 0 18px rgba(52, 211, 153, .42);
             animation: splashLoading 5s linear forwards;
         }
         
@@ -599,12 +669,12 @@
                 padding: 56px 16px 72px;
             }
             #home h1 {
-                font-size: clamp(2.65rem, 13vw, 4rem);
-                line-height: .98;
+                font-size: clamp(2.25rem, 10vw, 3.3rem);
+                line-height: 1.02;
             }
             #home .reveal>p {
-                font-size: .98rem;
-                line-height: 1.8;
+                font-size: .9rem;
+                line-height: 1.65;
             }
             #home .mt-8.flex {
                 display: grid;
@@ -701,7 +771,7 @@
                 display: none;
             }
             #home h1 {
-                font-size: 2.45rem;
+                font-size: 2.1rem;
             }
             #uiLanguage {
                 font-size: 10px;
@@ -1082,15 +1152,15 @@
             <div class="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_.95fr]">
                 <div class="reveal">
                     <div class="mb-5 flex items-center gap-3 text-[11px] font-black uppercase tracking-[.2em] text-slate-500 dark:text-slate-400">
-                        <span class="h-1 w-8 rounded-full bg-gradient-to-r from-pink-500 via-violet-500 to-blue-500"></span>
-                        <span data-i18n="hero.kicker">Akili Bandia kwa Lugha za Tanzania</span>
+                        <span class="hero-gradient-rule h-1 w-8 rounded-full"></span>
+                        <span data-i18n="hero.kicker">AI kwa lugha za Tanzania</span>
                     </div>
-                    <h1 class="max-w-4xl font-display text-5xl font-extrabold leading-[.98] tracking-[-.04em] sm:text-6xl lg:text-7xl">
-                        <span data-i18n="hero.title1">Teknolojia inayotafasiri na kuzungumza</span>
-                        <span class="bg-gradient-to-r from-rose-500 via-violet-500 to-blue-500 bg-clip-text text-transparent" data-i18n="hero.title2">lugha za asili Tanzania.</span>
+                    <h1 class="max-w-3xl font-display text-4xl font-extrabold leading-[1.02] tracking-[-.04em] sm:text-5xl lg:text-6xl">
+                        <span data-i18n="hero.title1">Tafsiri na zungumza</span>
+                        <span class="hero-gradient-text" data-i18n="hero.title2">lugha za Tanzania.</span>
                     </h1>
-                    <p class="mt-7 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg dark:text-slate-300" data-i18n="hero.description">
-                        Tanlingo inaleta tafsiri, mazungumzo, sauti na teknolojia ya lugha karibu na jamii za Tanzania.
+                    <p class="mt-5 max-w-xl text-sm leading-7 text-slate-600 sm:text-base dark:text-slate-300" data-i18n="hero.description">
+                        Tanlingo hurahisisha mawasiliano kwa lugha za Tanzania.
                     </p>
                     <div class="mt-8 flex flex-wrap gap-3">
                         <a href="#try-system" class="theme-cta rounded-2xl bg-slate-950 px-6 py-3.5 text-sm font-extrabold text-white shadow-lg transition hover:-translate-y-1 dark:bg-white dark:text-slate-950" data-i18n="hero.ctaPrimary">Jaribu mfumo →</a>
@@ -1253,36 +1323,72 @@
 
     </main>
 
-    <footer class="site-footer border-t border-slate-200 bg-slate-950 px-5 py-12 text-slate-300 dark:border-slate-800 sm:px-8">
-        <div class="mx-auto max-w-7xl">
-            <div class="grid gap-10 md:grid-cols-[1.25fr_.9fr_.9fr]">
-                <div>
-                    <div class="font-bold text-white"><img src="/tanlingo-wordmark.svg?v=8" alt="Tanlingo" width="154" height="44" class="inline-block align-middle"></div>
-                    <p class="mt-4 max-w-md text-sm leading-7 text-slate-400" data-i18n="footer.description">
+    <footer class="site-footer border-t border-slate-200 bg-slate-950 px-5 py-14 text-slate-300 dark:border-slate-800 sm:px-8">
+        <div class="site-footer-inner mx-auto max-w-7xl">
+            <div class="site-footer-grid grid gap-6 md:grid-cols-3">
+                <section class="rounded-3xl border border-white/10 bg-white/[.04] p-6 sm:p-7">
+                    <img src="/tanlingo-wordmark.svg?v=8" alt="Tanlingo" width="154" height="44" class="h-11 w-[154px] object-contain">
+                    <p class="mt-5 max-w-md text-sm leading-7 text-slate-300" data-i18n="footer.description">
                         Teknolojia ya lugha inayounganisha watu, inalinda urithi wa lugha, na kurahisisha upatikanaji wa maarifa Tanzania.
                     </p>
-                </div>
-                <div>
-                    <h2 class="text-xs font-black uppercase tracking-[.2em] text-slate-500" data-i18n="footer.focus">Tunacholenga</h2>
-                    <p class="mt-4 text-sm leading-7 text-slate-300" data-i18n="footer.focusText">Lugha · Jamii · Elimu · Afya · Ubunifu</p>
-                </div>
-                <div>
-                    <h2 class="text-xs font-black uppercase tracking-[.2em] text-slate-500" data-i18n="footer.github">Akaunti za GitHub</h2>
-                    <div class="mt-4 flex flex-col items-start gap-2 text-sm">
-                        <a class="text-slate-300 transition hover:text-white hover:underline" href="https://github.com/Nelson7com" target="_blank" rel="noreferrer">Nelson7com</a>
-                        <a class="text-slate-300 transition hover:text-white hover:underline" href="https://github.com/EssauGidion" target="_blank" rel="noreferrer">EssauGidion</a>
-                        <a class="text-slate-300 transition hover:text-white hover:underline" href="https://github.com/johanesjackson2005-com" target="_blank" rel="noreferrer">johanes jackson 2005-com</a>
+                    <div class="mt-6 inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1.5 text-xs font-semibold text-emerald-200">
+                        <span class="h-2 w-2 rounded-full bg-emerald-400" aria-hidden="true"></span>
+                        Tanzania · East Africa
                     </div>
-                </div>
+                </section>
+
+                <section class="rounded-3xl border border-white/10 bg-white/[.04] p-6 sm:p-7">
+                    <h2 class="text-xs font-black uppercase tracking-[.2em] text-slate-400" data-i18n="footer.focus">Tunacholenga</h2>
+                    <p class="mt-4 text-sm leading-7 text-slate-300" data-i18n="footer.focusText">Lugha · Jamii · Elimu · Afya · Ubunifu</p>
+                    <div class="mt-6 border-t border-white/10 pt-5">
+                        <h3 class="text-xs font-bold uppercase tracking-[.16em] text-slate-400" data-i18n="footer.github">Akaunti za GitHub</h3>
+                        <div class="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+                            <a class="transition hover:text-emerald-300 hover:underline" href="https://github.com/Nelson7com" target="_blank" rel="noopener noreferrer">Nelson7com</a>
+                            <a class="transition hover:text-emerald-300 hover:underline" href="https://github.com/EssauGidion" target="_blank" rel="noopener noreferrer">EssauGidion</a>
+                            <a class="transition hover:text-emerald-300 hover:underline" href="https://github.com/johanesjackson2005-com" target="_blank" rel="noopener noreferrer">Johanes Jackson</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="rounded-3xl border border-white/10 bg-white/[.04] p-6 sm:p-7">
+                    <h2 class="text-xs font-black uppercase tracking-[.2em] text-slate-400" data-i18n="footer.connect">Tupate mtandaoni</h2>
+                    <a class="mt-4 flex items-center gap-3 rounded-2xl border border-white/10 bg-slate-900/70 p-3 transition hover:border-emerald-300/40 hover:bg-slate-900" href="https://github.com/Signi-AI/TANZANIA_LOCAL_LANGUAGE" target="_blank" rel="noopener noreferrer">
+                        <img class="h-11 w-11 rounded-xl object-cover" src="https://github.com/Signi-AI.png?size=96" alt="Signi-AI GitHub logo" width="44" height="44" loading="lazy">
+                        <span class="min-w-0">
+                            <span class="block text-sm font-bold">Signi-AI</span>
+                            <span class="mt-1 block truncate text-xs text-slate-400">Tanzania Local Language · GitHub</span>
+                        </span>
+                        <svg class="ml-auto h-5 w-5 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.54v-2.1c-3.1.67-3.76-1.31-3.76-1.31-.5-1.29-1.24-1.63-1.24-1.63-1.02-.7.08-.69.08-.69 1.12.08 1.71 1.15 1.71 1.15 1 .1.78 2.08 3.65 1.48.1-.74.4-1.25.72-1.54-2.48-.28-5.09-1.24-5.09-5.5 0-1.22.43-2.22 1.15-3-.12-.28-.5-1.42.1-2.96 0 0 .94-.3 3.06 1.14a10.6 10.6 0 0 1 5.57 0c2.12-1.44 3.06-1.14 3.06-1.14.6 1.54.22 2.68.1 2.96.72.78 1.15 1.78 1.15 3 0 4.27-2.62 5.22-5.11 5.49.4.35.76 1.02.76 2.06v3.05c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/>
+                        </svg>
+                    </a>
+
+                    <div class="mt-4 grid gap-2">
+                        <a class="flex min-w-0 items-center gap-3 rounded-xl px-2 py-2 text-sm transition hover:bg-white/5 hover:text-white" href="mailto:johanesjackson2005@gmail.com">
+                            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-white/5" aria-hidden="true">✉</span>
+                            <span class="truncate">johanesjackson2005@gmail.com</span>
+                        </a>
+                        <a class="flex items-center gap-3 rounded-xl px-2 py-2 text-sm transition hover:bg-white/5 hover:text-white" href="https://tz.linkedin.com/in/johanes-jackson-4433663b2" target="_blank" rel="noopener noreferrer">
+                            <svg class="h-9 w-9 shrink-0" viewBox="0 0 24 24" role="img" aria-label="LinkedIn">
+                                <path fill="#0A66C2" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V8.99h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V8.99h3.56v11.46ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.44c.98 0 1.79-.77 1.79-1.72V1.72C24 .77 23.19 0 22.21 0h.01Z"/>
+                            </svg>
+                            <span>Johanes Jackson · LinkedIn</span>
+                        </a>
+                        <a class="flex items-center gap-3 rounded-xl px-2 py-2 text-sm transition hover:bg-white/5 hover:text-white" href="https://aisignalprocessinghub.com/" target="_blank" rel="noopener noreferrer">
+                            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-white/5 text-base font-bold text-emerald-300" aria-hidden="true">AI</span>
+                            <span>AI Signal Processing Hub</span>
+                        </a>
+                    </div>
+                </section>
             </div>
-            <div class="mt-10 flex flex-col justify-between gap-3 border-t border-slate-800 pt-5 text-xs text-slate-500 sm:flex-row">
+            <div class="mt-8 flex flex-col justify-between gap-3 border-t border-white/10 pt-5 text-xs text-slate-400 sm:flex-row">
                 <span data-i18n="footer.motto">Akili bandia kwa lugha za Tanzania · Umoja kupitia teknolojia</span>
-                <span class="font-semibold text-slate-400">© 2026 Tanlingo</span>
+                <span class="font-semibold">© 2026 Tanlingo</span>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=shared-settings-v6"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
 

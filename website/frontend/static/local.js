@@ -80,9 +80,9 @@ function updateHeroHeading(){
   document.title = "Tanlingo";
 }
 
-function applyUILanguage(lang){
+function applyUILanguage(lang, persist = true){
   uiLanguage = lang;
-  localStorage.setItem("locallang-ui",lang);
+  if(persist) localStorage.setItem("locallang-ui",lang);
   document.documentElement.lang = lang;
   $("#uiLanguage").value = lang;
   const dict = translations[lang];
@@ -94,6 +94,12 @@ function applyUILanguage(lang){
 }
 
 $("#uiLanguage").addEventListener("change", e=>applyUILanguage(e.target.value));
+
+window.addEventListener("storage", event=>{
+  if(event.key==="locallang-ui" && (event.newValue==="sw" || event.newValue==="en")){
+    applyUILanguage(event.newValue,false);
+  }
+});
 
 const mobileMenu = $("#mobileMenu");
 mobileMenu.addEventListener("click",()=>$("#siteNav").classList.toggle("open"));

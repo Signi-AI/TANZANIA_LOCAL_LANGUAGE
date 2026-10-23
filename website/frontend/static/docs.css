@@ -85,6 +85,27 @@ NAVIGATION
     min-width: max-content;
 }
 
+.docs-back {
+    display: inline-grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    border: 1px solid var(--docs-line);
+    border-radius: 50%;
+    color: var(--docs-text);
+    background: rgba(255, 255, 255, .045);
+    font-size: 22px;
+    line-height: 1;
+    transition: .2s ease;
+}
+
+.docs-back:hover,
+.docs-back:focus-visible {
+    color: #061024;
+    background: var(--docs-cyan);
+}
+
 .docs-brand-logo {
     display: block;
     width: 156px;
@@ -1146,12 +1167,30 @@ RESPONSIVE
     .docs-nav {
         width: calc(100% - 20px);
         margin-top: 10px;
+        gap: 8px;
+        padding: 8px 10px;
+    }
+    .docs-back {
+        width: 34px;
+        height: 34px;
+        flex-basis: 34px;
+        font-size: 19px;
+    }
+    .docs-brand-logo {
+        width: 100px;
+        height: 40px;
+    }
+    .docs-nav .nav-tools {
+        gap: 5px;
     }
     .docs-nav .theme-label {
         display: none;
     }
     .docs-language {
         margin-left: auto;
+    }
+    .docs-language .lang-btn {
+        padding: 5px 7px;
     }
     .docs-hero {
         padding: 65px 0 50px;
@@ -1177,6 +1216,41 @@ RESPONSIVE
     .room-arrow {
         transform: rotate(90deg);
         text-align: center;
+    }
+}
+
+@media (max-width: 360px) {
+    .docs-nav {
+        gap: 4px;
+        padding-inline: 7px;
+    }
+    .docs-back {
+        width: 30px;
+        height: 30px;
+        flex-basis: 30px;
+        font-size: 17px;
+    }
+    .docs-nav .brand {
+        gap: 5px;
+    }
+    .docs-brand-logo {
+        width: 72px;
+        height: 34px;
+    }
+    .docs-nav .nav-tools {
+        gap: 3px;
+    }
+    .docs-language {
+        padding: 3px;
+    }
+    .docs-language .lang-btn {
+        padding: 4px 5px;
+    }
+    .docs-nav .docs-theme-toggle {
+        padding: 6px;
+    }
+    .docs-nav .menu {
+        padding: 7px 8px;
     }
     .connection-status {
         grid-template-columns: 1fr;
@@ -1342,8 +1416,8 @@ RESPONSIVE
 
 @media (max-width: 600px) {
     .docs-brand-logo {
-        width: 132px;
-        height: 38px;
+        width: 100px;
+        height: 40px;
     }
 
     .docs-brand-name {
@@ -1369,5 +1443,29 @@ RESPONSIVE
     .docs-hero-copy>p {
         font-size: .98rem;
         line-height: 1.7;
+    }
+}
+
+@media (max-width: 360px) {
+    .docs-nav {
+        gap: 4px;
+        padding-inline: 7px;
+    }
+
+    .docs-nav .brand {
+        gap: 5px;
+    }
+
+    .docs-brand-logo {
+        width: 72px;
+        height: 34px;
+    }
+
+    .docs-nav .nav-tools {
+        gap: 3px;
+    }
+
+    .docs-language .lang-btn {
+        padding: 4px 5px;
     }
 }

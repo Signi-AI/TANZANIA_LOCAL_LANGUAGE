@@ -7,7 +7,7 @@
     <title>Tanlingo — Mtafsiri wa lugha za Tanzania</title>
     <meta name="description" content="Tafsiri ya papo kwa papo kati ya Sukuma, Kihaya/Ruhaya, Kinyakyusa na Kiswahili kwa sauti au maandishi.">
     <link rel="icon" type="image/svg+xml" href="/tanlingo.svg?v=5">
-    <link rel="stylesheet" href="styles.css?v=tanlingo">
+    <link rel="stylesheet" href="styles.css?v=tanlingo-v6">
 </head>
 
 <body>
@@ -22,6 +22,9 @@
         <div class="wrap hero-inner">
             <div>
                 <div class="brand-lockup">
+                    <a class="chatbot-back" href="/home.html" aria-label="Rudi ukurasa wa mwanzo" title="Rudi ukurasa wa mwanzo">
+                        <span aria-hidden="true">←</span>
+                    </a>
                     <img class="brand-logo" src="/tanlingo-wordmark.svg?v=8" alt="Tanlingo">
                     <span class="pill"><i class="dot"></i> CHATBOT</span>
                 </div>
@@ -29,17 +32,6 @@
                 <p class="lead" data-i18n="subtitle">
                     Mgonjwa anaongea Kihaya, Sukuma au Kinyakyusa — daktari anasoma na kusikia Kiswahili papo hapo.
                 </p>
-            </div>
-            <div class="ui-lang">
-                <span data-i18n="uiLang">Lugha ya tovuti</span>
-                <div class="toggle">
-                    <button type="button" class="active" data-ui="sw">SW</button>
-                    <button type="button" data-ui="en">EN</button>
-                </div>
-                <div class="theme-global" aria-label="Theme">
-                    <button type="button" id="global-theme-light" data-theme="light" class="small active" data-i18n="light">Mwanga</button>
-                    <button type="button" id="global-theme-dark" data-theme="dark" class="small flag-gradient" data-i18n="dark">Giza</button>
-                </div>
             </div>
         </div>
     </header>
@@ -85,10 +77,6 @@
                 <div class="view" id="view-main" data-theme="light">
                     <div class="view-head">
                         <strong data-i18n="liveConversation">Mazungumzo ya moja kwa moja</strong>
-                        <div class="theme-toggle">
-                            <button type="button" data-view="main" data-theme="light" class="small active" data-i18n="light">Mwanga</button>
-                            <button type="button" data-view="main" data-theme="dark" class="small" data-i18n="dark">Giza</button>
-                        </div>
                     </div>
                     <div id="conversation-main" class="conversation">
                         <p class="muted center" id="empty-main" data-i18n="empty">Mazungumzo yataonekana hapa.</p>
@@ -100,10 +88,23 @@
                 <button type="button" class="settings-heading" aria-label="Toggle settings" aria-expanded="true">
                     <span class="settings-icon" aria-hidden="true">⚙</span>
                     <div>
-                        <strong>Settings</strong>
+                        <strong data-i18n="settings">Mipangilio</strong>
                         <span>Role, language &amp; voice</span>
                     </div>
                 </button>
+                <div class="role-global-settings" aria-label="Mipangilio ya tovuti">
+                    <strong data-i18n="preferences">Lugha na mwonekano</strong>
+                    <div class="role-global-controls">
+                        <div class="toggle" role="group" aria-label="Lugha ya tovuti">
+                            <button type="button" data-ui="sw" class="active">SW</button>
+                            <button type="button" data-ui="en">EN</button>
+                        </div>
+                        <div class="theme-global" role="group" aria-label="Mwonekano wa tovuti">
+                            <button type="button" id="global-theme-light" data-theme="light" class="small active" data-i18n="light">Mwanga</button>
+                            <button type="button" id="global-theme-dark" data-theme="dark" class="small" data-i18n="dark">Giza</button>
+                        </div>
+                    </div>
+                </div>
                 <article class="panel role-panel" data-role="patient">
                     <div class="panel-head">
                         <div>
@@ -252,7 +253,7 @@
             window.setTimeout(() => splash.remove(), 700);
         }, 1200);
     </script>
-    <script src="/static/app.js"></script>
+    <script src="/static/app.js?v=global-conversation-settings-v2"></script>
     <script>
         // Minimal fallback: if main app failed to initialize, attach simple handlers so UI remains usable.
         (function() {
@@ -261,7 +262,24 @@
             const setGlobalTheme = (theme) => {
                 document.body.setAttribute('data-theme', theme);
                 localStorage.setItem('ll_theme', theme);
+                localStorage.setItem('locallang-theme', theme);
+                document.querySelectorAll('.view[data-theme]').forEach(view => {
+                    view.dataset.theme = theme;
+                });
+                document.getElementById('global-theme-light')?.classList.toggle('active', theme === 'light');
+                document.getElementById('global-theme-dark')?.classList.toggle('active', theme === 'dark');
             };
+            document.querySelectorAll('[data-ui]').forEach(button => {
+                button.onclick = () => {
+                    const language = button.dataset.ui;
+                    document.documentElement.lang = language;
+                    localStorage.setItem('ll_ui', language);
+                    localStorage.setItem('locallang-ui', language);
+                    document.querySelectorAll('[data-ui]').forEach(option => {
+                        option.classList.toggle('active', option === button);
+                    });
+                };
+            });
             const gLight = document.getElementById('global-theme-light');
             const gDark = document.getElementById('global-theme-dark');
             if (gLight) gLight.onclick = () => setGlobalTheme('light');

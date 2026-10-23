@@ -51,7 +51,7 @@ function setupTheme() {
     const btn = document.getElementById("themeBtn");
     const book = document.getElementById("themeBook");
     const saved = localStorage.getItem("locallang-theme");
-    if (saved === "dark") document.documentElement.classList.add("dark");
+    document.documentElement.classList.toggle("dark", saved === "dark");
     updateIcon();
     btn.addEventListener("click", () => {
         book.classList.remove("is-opening");
@@ -70,6 +70,12 @@ function setupTheme() {
         btn.setAttribute("aria-pressed", String(isDark));
         btn.setAttribute("aria-label", isDark ? "Washa light mode" : "Washa dark mode");
     }
+
+    window.addEventListener("storage", (event) => {
+        if (event.key !== "locallang-theme") return;
+        document.documentElement.classList.toggle("dark", event.newValue === "dark");
+        updateIcon();
+    });
 }
 
 function setupMobileMenu() {
@@ -95,6 +101,10 @@ let currentLanguage = 'sw';
 
 function setupLanguageSelector() {
     const select = document.getElementById("uiLanguage");
+    const savedLanguage = localStorage.getItem("locallang-ui");
+    if (savedLanguage === "sw" || savedLanguage === "en") {
+        select.value = savedLanguage;
+    }
     const translations = {
         sw: {
             "nav.home": "Mwanzo",
@@ -105,10 +115,10 @@ function setupLanguageSelector() {
             "nav.features": "Vipengele",
             "nav.maelezo": "Maelezo",
             "nav.start": "Anza kutumia →",
-            "hero.kicker": "Akili Bandia kwa Lugha za Tanzania",
-            "hero.title1": "Teknolojia inayotafasiri na kuzungumza",
-            "hero.title2": "lugha za asili Tanzania.",
-            "hero.description": "LocalLang Tanzania AI inaleta tafsiri, mazungumzo, sauti na teknolojia ya lugha karibu na jamii za Tanzania.",
+            "hero.kicker": "AI kwa lugha za Tanzania",
+            "hero.title1": "Tafsiri na zungumza",
+            "hero.title2": "lugha za Tanzania.",
+            "hero.description": "Tanlingo hurahisisha mawasiliano kwa lugha za Tanzania.",
             "hero.ctaPrimary": "Jaribu mfumo →",
             "hero.ctaSecondary": "Jinsi inavyofanya kazi",
             "hero.stat1": "Lugha / makabila",
@@ -164,6 +174,7 @@ function setupLanguageSelector() {
             "footer.focus": "Tunacholenga",
             "footer.focusText": "Lugha · Jamii · Elimu · Afya · Ubunifu",
             "footer.github": "Akaunti za GitHub",
+            "footer.connect": "Tupate mtandaoni",
             "footer.motto": "Akili bandia kwa lugha za Tanzania · Umoja kupitia teknolojia"
         },
         en: {
@@ -175,10 +186,10 @@ function setupLanguageSelector() {
             "nav.features": "Features",
             "nav.maelezo": "Documentation",
             "nav.start": "Start using →",
-            "hero.kicker": "AI for Tanzanian Languages",
-            "hero.title1": "Technology that translates and speaks",
-            "hero.title2": "Tanzania's indigenous languages.",
-            "hero.description": "LocalLang Tanzania AI brings translation, conversation, voice, and language technology close to communities across Tanzania.",
+            "hero.kicker": "AI for Tanzanian languages",
+            "hero.title1": "Translate and speak",
+            "hero.title2": "Tanzanian languages.",
+            "hero.description": "Tanlingo makes communication in Tanzanian languages easier.",
             "hero.ctaPrimary": "Try the system →",
             "hero.ctaSecondary": "How it works",
             "hero.stat1": "Languages / tribes",
@@ -234,6 +245,7 @@ function setupLanguageSelector() {
             "footer.focus": "Our focus",
             "footer.focusText": "Languages · Communities · Education · Health · Innovation",
             "footer.github": "GitHub accounts",
+            "footer.connect": "Connect with us",
             "footer.motto": "AI for Tanzanian languages · Unity through technology"
         }
     };
@@ -241,6 +253,7 @@ function setupLanguageSelector() {
     const translatePage = (lang) => {
         const dictionary = translations[lang] || translations.sw;
         currentLanguage = lang;
+        document.documentElement.lang = lang;
         document.querySelectorAll("[data-i18n]").forEach((element) => {
             if (dictionary[element.dataset.i18n]) {
                 element.textContent = dictionary[element.dataset.i18n];
@@ -250,7 +263,14 @@ function setupLanguageSelector() {
     };
 
     select.addEventListener("change", () => {
+        localStorage.setItem("locallang-ui", select.value);
         translatePage(select.value);
+    });
+
+    window.addEventListener("storage", (event) => {
+        if (event.key !== "locallang-ui" || (event.newValue !== "sw" && event.newValue !== "en")) return;
+        select.value = event.newValue;
+        translatePage(event.newValue);
     });
 
     translatePage(select.value || "sw");
@@ -265,7 +285,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setupLanguageSelector();
     document.querySelectorAll("img").forEach(imageFallback);
 });
-javascript
 document.addEventListener("DOMContentLoaded", () => {
 
     const mobileMenu = document.getElementById("mobileMenu");

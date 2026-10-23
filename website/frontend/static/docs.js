@@ -457,7 +457,7 @@ const translations = {
    LANGUAGE SYSTEM
    ========================================================= */
 
-function applyLanguage(language) {
+function applyLanguage(language, persist = true) {
 
     const dictionary = translations[language];
 
@@ -497,10 +497,9 @@ function applyLanguage(language) {
     });
 
 
-    localStorage.setItem(
-        "tan-lang-docs-language",
-        language
-    );
+    if (persist) {
+        localStorage.setItem("locallang-ui", language);
+    }
 
 }
 
@@ -508,7 +507,7 @@ function applyLanguage(language) {
 /* Load saved language */
 
 const savedLanguage =
-    localStorage.getItem("tan-lang-docs-language") || "sw";
+    localStorage.getItem("locallang-ui") || "sw";
 
 applyLanguage(savedLanguage);
 
@@ -534,7 +533,7 @@ const themeToggle =
     document.querySelector("#docsThemeToggle");
 
 
-function applyDocsTheme(theme) {
+function applyDocsTheme(theme, persist = true) {
 
     const light = theme === "light";
 
@@ -581,10 +580,9 @@ function applyDocsTheme(theme) {
     }
 
 
-    localStorage.setItem(
-        "tan-lang-docs-theme",
-        theme
-    );
+    if (persist) {
+        localStorage.setItem("locallang-theme", theme);
+    }
 
 }
 
@@ -592,7 +590,7 @@ function applyDocsTheme(theme) {
 /* Load saved theme */
 
 const savedTheme =
-    localStorage.getItem("tan-lang-docs-theme") || "dark";
+    localStorage.getItem("locallang-theme") || "light";
 
 applyDocsTheme(savedTheme);
 
@@ -622,18 +620,27 @@ if (themeToggle) {
 
 const originalApplyLanguage = applyLanguage;
 
-applyLanguage = function(language) {
+applyLanguage = function(language, persist = true) {
 
-    originalApplyLanguage(language);
+    originalApplyLanguage(language, persist);
 
     const currentTheme =
         document.body.classList.contains("docs-light") ?
         "light" :
         "dark";
 
-    applyDocsTheme(currentTheme);
+    applyDocsTheme(currentTheme, false);
 
 };
+
+window.addEventListener("storage", (event) => {
+    if (event.key === "locallang-ui" && (event.newValue === "sw" || event.newValue === "en")) {
+        applyLanguage(event.newValue, false);
+    }
+    if (event.key === "locallang-theme" && (event.newValue === "light" || event.newValue === "dark")) {
+        applyDocsTheme(event.newValue, false);
+    }
+});
 
 
 /* =========================================================

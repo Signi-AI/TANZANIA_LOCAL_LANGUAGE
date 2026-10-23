@@ -46,8 +46,10 @@ body[data-theme="dark"] {
     overflow: hidden;
     color: #fff;
     background:
-        radial-gradient(circle at 50% 38%, rgba(52, 211, 153, .2), transparent 34%),
-        linear-gradient(135deg, #031d2e, #062f38 48%, #06172c);
+        radial-gradient(ellipse at 14% 18%, rgba(31, 174, 109, .28), transparent 36%),
+        radial-gradient(ellipse at 88% 20%, rgba(27, 109, 193, .3), transparent 37%),
+        radial-gradient(ellipse at 72% 88%, rgba(247, 201, 76, .17), transparent 35%),
+        linear-gradient(132deg, #031511 0%, #061c2b 48%, #071827 72%, #04120f 100%);
     animation: splash-fade-in .8s ease both;
 }
 
@@ -55,7 +57,7 @@ body[data-theme="dark"] {
 .splash-screen::after {
     content: "";
     position: absolute;
-    border: 1px solid rgba(89, 217, 255, .2);
+    border: 1px solid rgba(139, 227, 203, .19);
     border-radius: 50%;
     pointer-events: none;
 }
@@ -69,7 +71,7 @@ body[data-theme="dark"] {
 .splash-screen::after {
     width: min(48vw, 500px);
     height: min(48vw, 500px);
-    border-color: rgba(52, 211, 153, .16);
+    border-color: rgba(247, 201, 76, .16);
     animation: splash-orbit 9s linear reverse infinite;
 }
 
@@ -1937,12 +1939,7 @@ footer img {
 }
 
 .translation-workspace:not(.conversation-started) .composer-dock {
-    grid-area: conversation;
-    align-self: center;
-    z-index: 3;
-    margin-top: 0;
-    padding-top: 0;
-    border-top: 0;
+    grid-area: composer;
 }
 
 .translation-workspace:not(.conversation-started) .conversation {
@@ -1954,6 +1951,7 @@ footer img {
 }
 
 .composer {
+    min-width: 0;
     padding: 16px;
     border: 1px solid var(--border);
     border-radius: 18px;
@@ -2315,7 +2313,7 @@ body:not([data-theme="dark"]) .panel[data-role="doctor"] {
 /* Final responsive sizing keeps the header compact and the workspace usable on every screen. */
 .hero {
     min-height: 0;
-    padding: 42px 0 70px;
+    padding: 24px 0 38px;
 }
 
 .hero h1 {
@@ -2368,7 +2366,7 @@ body:not([data-theme="dark"]) .panel[data-role="doctor"] {
     }
 
     .hero {
-        padding: 30px 0 52px;
+        padding: 20px 0 32px;
     }
 
     .hero-inner {
@@ -2441,8 +2439,7 @@ body:not([data-theme="dark"]) .panel[data-role="doctor"] {
     }
 
     .translation-workspace:not(.conversation-started) .composer-dock {
-        grid-area: conversation;
-        align-self: center;
+        grid-area: composer;
     }
 
     .conversation-panel-head {
@@ -2459,13 +2456,13 @@ body:not([data-theme="dark"]) .panel[data-role="doctor"] {
     }
 
     .translation-workspace .view {
-        min-height: 320px;
+        min-height: 0;
         padding: 12px;
     }
 
     .translation-workspace .conversation {
-        min-height: 250px;
-        max-height: 55vh;
+        min-height: 130px;
+        max-height: clamp(130px, 30vh, 220px);
     }
 
     .view-head {
@@ -2490,7 +2487,7 @@ body:not([data-theme="dark"]) .panel[data-role="doctor"] {
 
 @media (max-width: 420px) {
     .hero {
-        padding: 24px 0 44px;
+        padding: 18px 0 28px;
     }
 
     .brand-logo {
@@ -2749,5 +2746,196 @@ footer {
     .brand-logo {
         width: 128px;
         height: 38px;
+    }
+}
+
+.translation-workspace .view {
+    min-height: 0;
+}
+
+.translation-workspace .conversation {
+    min-height: 130px;
+    max-height: clamp(130px, 30vh, 220px);
+}
+
+.view-head {
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.role-global-settings {
+    display: grid;
+    gap: 8px;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: rgba(13, 148, 136, .06);
+}
+
+.role-global-settings > strong {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.role-global-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+.role-global-controls .toggle,
+.role-global-controls .theme-global {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 3px;
+    max-width: 100%;
+    padding: 3px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .45);
+}
+
+.role-global-controls .toggle button,
+.role-global-controls .theme-global .small {
+    min-width: 0;
+    padding: 5px 7px;
+    border: 0;
+    border-radius: 999px;
+    color: var(--text);
+    background: transparent;
+    font-size: 11px;
+    line-height: 1.2;
+}
+
+.role-global-controls .toggle button.active,
+.role-global-controls .theme-global .small.active {
+    color: #073b35;
+    background: linear-gradient(120deg, #f4c542, #ffe985);
+}
+
+body[data-theme="dark"] .role-global-settings {
+    background: rgba(255, 255, 255, .04);
+}
+
+body[data-theme="dark"] .role-global-controls .toggle,
+body[data-theme="dark"] .role-global-controls .theme-global {
+    background: rgba(0, 0, 0, .16);
+}
+
+body[data-theme="dark"] .role-global-controls .toggle button,
+body[data-theme="dark"] .role-global-controls .theme-global .small {
+    color: var(--text);
+}
+
+@media (max-width: 768px) {
+    .translation-workspace:not(.settings-collapsed) {
+        grid-template-columns: minmax(0, 1.15fr) minmax(126px, .85fr);
+        grid-template-areas:
+            "conversation-head conversation-head"
+            "conversation roles"
+            "composer composer";
+        column-gap: 10px;
+    }
+
+    .translation-workspace:not(.settings-collapsed) .role-panels {
+        min-width: 0;
+        margin: 10px 0 0;
+        gap: 8px;
+    }
+
+    .translation-workspace:not(.settings-collapsed) .role-global-settings {
+        padding: 7px;
+    }
+
+    .translation-workspace:not(.settings-collapsed) .role-global-controls {
+        align-items: flex-start;
+    }
+
+    .translation-workspace:not(.settings-collapsed) .settings-heading {
+        gap: 6px;
+        padding: 2px 0;
+    }
+
+    .translation-workspace:not(.settings-collapsed) .settings-heading span:last-child {
+        font-size: 10px;
+    }
+
+    .translation-workspace:not(.settings-collapsed) .role-panel {
+        max-height: 320px;
+        overflow-y: auto;
+        padding: 9px;
+    }
+
+    .translation-workspace:not(.settings-collapsed) .role-panel .panel-head > div {
+        min-width: 0;
+    }
+
+    .translation-workspace:not(.settings-collapsed) .role-panel .role-select,
+    .translation-workspace:not(.settings-collapsed) .role-panel .lang-select,
+    .translation-workspace:not(.settings-collapsed) .role-panel .gender-select {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        padding-inline: 6px;
+        font-size: 12px;
+    }
+
+    .translation-workspace:not(.settings-collapsed) .role-panel .small {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+}
+
+.brand-lockup {
+    gap: 10px;
+}
+
+.brand-logo {
+    width: clamp(190px, 22vw, 240px);
+    height: 68px;
+}
+
+.chatbot-back {
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(255, 255, 255, .28);
+    border-radius: 13px;
+    color: #fff;
+    background: rgba(255, 255, 255, .1);
+    font-size: 28px;
+    line-height: 1;
+    transition: background .2s ease, transform .2s ease;
+}
+
+.chatbot-back:hover,
+.chatbot-back:focus-visible {
+    background: rgba(255, 255, 255, .2);
+    transform: translateX(-2px);
+}
+
+@media (max-width: 680px) {
+    .brand-logo {
+        width: clamp(150px, 44vw, 180px);
+        height: 56px;
+    }
+
+    .chatbot-back {
+        flex-basis: 38px;
+        width: 38px;
+        height: 38px;
+    }
+}
+
+@media (max-width: 420px) {
+    .brand-logo {
+        width: 150px;
+        height: 50px;
     }
 }
