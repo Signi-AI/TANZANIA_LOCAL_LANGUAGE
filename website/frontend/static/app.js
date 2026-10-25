@@ -10,8 +10,7 @@ const activityTimers = {};
 
 const I18N = {
     sw: {
-        tagline: "Mtafsiri wa lugha za asili za Tanzania",
-        subtitle: "Mtu yeyote anaongea lugha za asili za Tanzania — mwingine anaelewa na kuona tafsiri ya haraka kwa lugha aliyoichagua.",
+
         patient: "Mgonjwa",
         doctor: "Daktari",
         patientLang: "Lugha ya mgonjwa",
@@ -19,7 +18,6 @@ const I18N = {
         settings: "Mipangilio",
         preferences: "Lugha na mwonekano",
         deviceCommunication: "Mawasiliano ya vifaa viwili",
-        conversationRoom: "Room ya mazungumzo",
         roomHint: "Tumia code hii kwenye simu na PC zote zilizo kwenye Wi-Fi moja.",
         roomCode: "Code ya room",
         screenRole: "Aina ya screen",
@@ -36,7 +34,6 @@ const I18N = {
         stopRecording: "Simamisha kurekodi",
         light: "Mwanga",
         dark: "Giza",
-        conversationViews: "Muonekano wa mazungumzo",
         liveConversation: "Mazungumzo ya moja kwa moja",
         patientView: "Muonekano wa mgonjwa",
         doctorView: "Muonekano wa daktari",
@@ -98,8 +95,7 @@ const I18N = {
         },
     },
     en: {
-        tagline: "Tanzanian local language translator",
-        subtitle: "Anyone can speak a local Tanzanian language — the other participant instantly reads and hears the translation in their chosen language.",
+
         patient: "Patient",
         doctor: "Doctor",
         patientLang: "Patient language",
@@ -107,7 +103,6 @@ const I18N = {
         settings: "Settings",
         preferences: "Language & appearance",
         deviceCommunication: "Two-device communication",
-        conversationRoom: "Conversation room",
         roomHint: "Use this code on the phone and PC connected to the same Wi-Fi.",
         roomCode: "Room code",
         screenRole: "Screen role",
@@ -184,35 +179,35 @@ const I18N = {
             English: "English",
             French: "French",
         },
-            // Role labels and language display names used in selects and chips
-            roles: {
-                Mgonjwa: "Patient",
-                Mteja: "Client",
-                Muhudumu: "Attendant",
-                Muuguzi: "Nurse",
-                Daktari: "Doctor",
-                Muhubiri: "Preacher",
-                Muumini: "Believer",
-                Mwalimu: "Teacher",
-                Msaidizi: "Assistant",
-                Custom: "Custom",
-            },
-            languages: {
-                Ruhaya: "Ruhaya (Kihaya)",
-                Sukuma: "Sukuma",
-                Kinyakyusa: "Kinyakyusa",
-                Kichaga: "Chaga",
-                Kihehe: "Kihehe",
-                Kiha: "Kiha",
-                Kijita: "Kijita",
-                Kizaramo: "Kizaramo",
-                Kimasai: "Maasai",
-                Kifipa: "Kifipa",
-                Kiswahili: "Swahili",
-                English: "English",
-                French: "French",
-            },
+        // Role labels and language display names used in selects and chips
+        roles: {
+            Mgonjwa: "Patient",
+            Mteja: "Client",
+            Muhudumu: "Attendant",
+            Muuguzi: "Nurse",
+            Daktari: "Doctor",
+            Muhubiri: "Preacher",
+            Muumini: "Believer",
+            Mwalimu: "Teacher",
+            Msaidizi: "Assistant",
+            Custom: "Custom",
         },
+        languages: {
+            Ruhaya: "Ruhaya (Kihaya)",
+            Sukuma: "Sukuma",
+            Kinyakyusa: "Kinyakyusa",
+            Kichaga: "Chaga",
+            Kihehe: "Kihehe",
+            Kiha: "Kiha",
+            Kijita: "Kijita",
+            Kizaramo: "Kizaramo",
+            Kimasai: "Maasai",
+            Kifipa: "Kifipa",
+            Kiswahili: "Swahili",
+            English: "English",
+            French: "French",
+        },
+    },
 };
 
 const state = {
@@ -289,7 +284,7 @@ function updateConversationViewLabels() {
 }
 
 function getActiveScreenSide() {
-    return document.querySelector("#screen-role")?.value || "patient";
+    return document.querySelector("#screen-role") ? .value || "patient";
 }
 
 function updateActiveScreenPanel() {
@@ -817,7 +812,9 @@ async function connectRoom() {
         const data = JSON.parse(event.data);
         if (data.type === "error" && data.code === "role_taken") {
             setRoomStatus(t("roleTaken"), false);
-            updateAvailableRoles({ [data.role]: true });
+            updateAvailableRoles({
+                [data.role]: true
+            });
             return;
         }
         if (data.type === "presence") {
@@ -920,18 +917,18 @@ function renderBubble(side, text, data, pending, existing) {
 
     // Build the translation bubble (for the other side)
     const buildTranslationEl = () => {
-            const el = document.createElement("div");
-            el.className = `bubble ${side}`; // Use original speaker's side for styling
-            const conf = (data && data.confidence) || "low";
-            const body = pending ?
-                `<p class="trans">…</p>` :
-                data && data.translation ?
-                `<p class="trans">${escapeHtml(data.translation)}</p>` :
-                `<p class="warn">${escapeHtml((data && data.message) || t("notFound"))}</p>`;
-            if (pending) el.classList.add("pending");
-        const actions = data && data.translation
-            ? `<div class="actions"><button class="ghost" data-copy>${t("copy")}</button><button class="ghost" data-speak>🔊</button></div>`
-            : "";
+        const el = document.createElement("div");
+        el.className = `bubble ${side}`; // Use original speaker's side for styling
+        const conf = (data && data.confidence) || "low";
+        const body = pending ?
+            `<p class="trans">…</p>` :
+            data && data.translation ?
+            `<p class="trans">${escapeHtml(data.translation)}</p>` :
+            `<p class="warn">${escapeHtml((data && data.message) || t("notFound"))}</p>`;
+        if (pending) el.classList.add("pending");
+        const actions = data && data.translation ?
+            `<div class="actions"><button class="ghost" data-copy>${t("copy")}</button><button class="ghost" data-speak>🔊</button></div>` :
+            "";
 
         const speaker = translateRole(getSideRole(side));
         el.innerHTML = `<div class="meta"><strong class="${side}">${speaker}</strong><span class="badge ${conf}">${t("translation")}: ${t(conf)}</span></div>
@@ -989,24 +986,25 @@ function renderBubble(side, text, data, pending, existing) {
 
     return null;
 }
+
 function escapeHtml(s) {
-  return String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;",
-  })[c]);
+    return String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+    })[c]);
 }
 
 function seedConversationSample() {
-  const samples = Array.isArray(window.sampleSet) ? window.sampleSet : [];
+    const samples = Array.isArray(window.sampleSet) ? window.sampleSet : [];
 
-  samples.forEach(({ box, role, text, translation, confidence }) => {
-    if (!box || box.querySelector(".bubble")) return;
-    const bubble = document.createElement("div");
-    bubble.className = `bubble ${role}`;
-    bubble.innerHTML = `
+    samples.forEach(({ box, role, text, translation, confidence }) => {
+        if (!box || box.querySelector(".bubble")) return;
+        const bubble = document.createElement("div");
+        bubble.className = `bubble ${role}`;
+        bubble.innerHTML = `
       <div class="meta">
         <strong class="${role}">${getSideRole(role)}</strong>
         <span class="badge ${confidence}">${t("confidence")}: ${t(confidence)}</span>
@@ -1014,161 +1012,161 @@ function seedConversationSample() {
       <p class="orig">${escapeHtml(text)}</p>
       <p class="trans">${escapeHtml(translation)}</p>
     `;
-    box.innerHTML = "";
-    box.appendChild(bubble);
-  });
+        box.innerHTML = "";
+        box.appendChild(bubble);
+    });
 }
 
 /* ------------------------------------------------------------------ events */
 $$("[data-mic]").forEach((btn) => (btn.onclick = () => startMic(btn.dataset.mic)));
 $$("[data-send]").forEach((btn) => {
-  const side = btn.dataset.send;
-  const input = $(`#input-${side}`);
-  btn.onclick = () => {
-    submit(side, input.value);
-    input.value = "";
-  };
-  input.onkeydown = (e) => {
-    if (e.key === "Enter") btn.click();
-  };
-  input.oninput = () => {
-    const hasText = input.value.trim().length > 0;
-    if (hasText) {
-      setConversationStarted(true);
-      setSettingsCollapsed(true);
-      responsiveSettingsCollapse = false;
-    }
-    if (activityTimers[side]) clearTimeout(activityTimers[side]);
-    sendActivity(hasText ? "typing" : "idle");
-    if (hasText) {
-        activityTimers[side] = setTimeout(() => sendActivity("idle"), 1400);
-    }
-  };
+    const side = btn.dataset.send;
+    const input = $(`#input-${side}`);
+    btn.onclick = () => {
+        submit(side, input.value);
+        input.value = "";
+    };
+    input.onkeydown = (e) => {
+        if (e.key === "Enter") btn.click();
+    };
+    input.oninput = () => {
+        const hasText = input.value.trim().length > 0;
+        if (hasText) {
+            setConversationStarted(true);
+            setSettingsCollapsed(true);
+            responsiveSettingsCollapse = false;
+        }
+        if (activityTimers[side]) clearTimeout(activityTimers[side]);
+        sendActivity(hasText ? "typing" : "idle");
+        if (hasText) {
+            activityTimers[side] = setTimeout(() => sendActivity("idle"), 1400);
+        }
+    };
 });
 
 function applyUILanguage(language, persist = true) {
-  state.ui = language;
-  if (persist) {
-    localStorage.setItem("ll_ui", language);
-    localStorage.setItem("locallang-ui", language);
-  }
-  applyI18n();
+    state.ui = language;
+    if (persist) {
+        localStorage.setItem("ll_ui", language);
+        localStorage.setItem("locallang-ui", language);
+    }
+    applyI18n();
 }
 
 $$("[data-ui]").forEach((btn) => {
-  btn.onclick = () => applyUILanguage(btn.dataset.ui);
+    btn.onclick = () => applyUILanguage(btn.dataset.ui);
 });
 
 $$(".chip").forEach((chip) => {
-  chip.onclick = () => {
-    const lang = chip.dataset.lang;
-    state.patientLang = lang;
-    state.sideLanguages.patient = lang;
-    localStorage.setItem("ll_lang", state.patientLang);
-    localStorage.setItem("ll_lang_patient", lang);
-    $$(".chip").forEach((c) => c.classList.toggle("active", c === chip));
-    applyI18n();
-  };
+    chip.onclick = () => {
+        const lang = chip.dataset.lang;
+        state.patientLang = lang;
+        state.sideLanguages.patient = lang;
+        localStorage.setItem("ll_lang", state.patientLang);
+        localStorage.setItem("ll_lang_patient", lang);
+        $$(".chip").forEach((c) => c.classList.toggle("active", c === chip));
+        applyI18n();
+    };
 });
 
 const patientLanguageSelect = document.getElementById("patient-language-select");
 if (patientLanguageSelect) {
-  patientLanguageSelect.value = getSideLanguage("patient");
-  patientLanguageSelect.onchange = () => {
-    const lang = patientLanguageSelect.value;
-    state.patientLang = lang;
-    state.sideLanguages.patient = lang;
-    localStorage.setItem("ll_lang", lang);
-    localStorage.setItem("ll_lang_patient", lang);
-    $$(".chip").forEach((c) => c.classList.toggle("active", c.dataset.lang === lang));
-    applyI18n();
-  };
+    patientLanguageSelect.value = getSideLanguage("patient");
+    patientLanguageSelect.onchange = () => {
+        const lang = patientLanguageSelect.value;
+        state.patientLang = lang;
+        state.sideLanguages.patient = lang;
+        localStorage.setItem("ll_lang", lang);
+        localStorage.setItem("ll_lang_patient", lang);
+        $$(".chip").forEach((c) => c.classList.toggle("active", c.dataset.lang === lang));
+        applyI18n();
+    };
 }
 
 const doctorLanguageSelect = document.getElementById("doctor-language-select");
 if (doctorLanguageSelect) {
-  doctorLanguageSelect.value = getSideLanguage("doctor");
-  doctorLanguageSelect.onchange = () => {
-    const lang = doctorLanguageSelect.value;
-    state.sideLanguages.doctor = lang;
-    localStorage.setItem("ll_lang_doctor", lang);
-    applyI18n();
-  };
+    doctorLanguageSelect.value = getSideLanguage("doctor");
+    doctorLanguageSelect.onchange = () => {
+        const lang = doctorLanguageSelect.value;
+        state.sideLanguages.doctor = lang;
+        localStorage.setItem("ll_lang_doctor", lang);
+        applyI18n();
+    };
 }
 
 const patientRoleSelect = document.getElementById("patient-role-select");
 if (patientRoleSelect) {
-  patientRoleSelect.value = getSideRole("patient");
-  patientRoleSelect.onchange = () => {
-    state.sideRoles.patient = patientRoleSelect.value;
-    localStorage.setItem("ll_role_patient", patientRoleSelect.value);
-    applyI18n();
-  };
+    patientRoleSelect.value = getSideRole("patient");
+    patientRoleSelect.onchange = () => {
+        state.sideRoles.patient = patientRoleSelect.value;
+        localStorage.setItem("ll_role_patient", patientRoleSelect.value);
+        applyI18n();
+    };
 }
 
 const doctorRoleSelect = document.getElementById("doctor-role-select");
 if (doctorRoleSelect) {
-  doctorRoleSelect.value = getSideRole("doctor");
-  doctorRoleSelect.onchange = () => {
-    state.sideRoles.doctor = doctorRoleSelect.value;
-    localStorage.setItem("ll_role_doctor", doctorRoleSelect.value);
-    applyI18n();
-  };
+    doctorRoleSelect.value = getSideRole("doctor");
+    doctorRoleSelect.onchange = () => {
+        state.sideRoles.doctor = doctorRoleSelect.value;
+        localStorage.setItem("ll_role_doctor", doctorRoleSelect.value);
+        applyI18n();
+    };
 }
 
 $("#voice-toggle").onclick = () => {
-  state.voice = !state.voice;
-  localStorage.setItem("ll_voice", state.voice ? "on" : "off");
-  $("#voice-toggle").classList.toggle("on", state.voice);
+    state.voice = !state.voice;
+    localStorage.setItem("ll_voice", state.voice ? "on" : "off");
+    $("#voice-toggle").classList.toggle("on", state.voice);
 };
 
 // Gender toggle buttons (Auto / Female / Male)
 const genderButtons = document.querySelectorAll('#gender-toggle .gender');
 if (genderButtons) {
-  genderButtons.forEach((b) => {
-    b.classList.toggle('active', b.dataset.gender === state.defaultGender);
-    b.onclick = () => {
-      const g = b.dataset.gender;
-      state.defaultGender = g;
-      localStorage.setItem('ll_gender', g);
-      genderButtons.forEach((bb) => bb.classList.toggle('active', bb === b));
-    };
-  });
+    genderButtons.forEach((b) => {
+        b.classList.toggle('active', b.dataset.gender === state.defaultGender);
+        b.onclick = () => {
+            const g = b.dataset.gender;
+            state.defaultGender = g;
+            localStorage.setItem('ll_gender', g);
+            genderButtons.forEach((bb) => bb.classList.toggle('active', bb === b));
+        };
+    });
 }
 
 // Per-side gender selects (patient / doctor)
 const patientGenderSelect = document.getElementById('patient-gender-select');
 if (patientGenderSelect) {
-  patientGenderSelect.value = state.genders.patient || 'auto';
-  const lab = document.getElementById('patient-gender');
-  if (lab) lab.textContent = t(patientGenderSelect.value === 'auto' ? 'auto' : patientGenderSelect.value);
-  patientGenderSelect.onchange = () => {
-    const v = patientGenderSelect.value;
-    state.genders.patient = v;
-    localStorage.setItem('ll_gender_patient', v);
-    if (lab) lab.textContent = t(v === 'auto' ? 'auto' : v);
-  };
+    patientGenderSelect.value = state.genders.patient || 'auto';
+    const lab = document.getElementById('patient-gender');
+    if (lab) lab.textContent = t(patientGenderSelect.value === 'auto' ? 'auto' : patientGenderSelect.value);
+    patientGenderSelect.onchange = () => {
+        const v = patientGenderSelect.value;
+        state.genders.patient = v;
+        localStorage.setItem('ll_gender_patient', v);
+        if (lab) lab.textContent = t(v === 'auto' ? 'auto' : v);
+    };
 }
 const doctorGenderSelect = document.getElementById('doctor-gender-select');
 if (doctorGenderSelect) {
-  doctorGenderSelect.value = state.genders.doctor || 'auto';
-  const lab2 = document.getElementById('doctor-gender');
-  if (lab2) lab2.textContent = t(doctorGenderSelect.value === 'auto' ? 'auto' : doctorGenderSelect.value);
-  doctorGenderSelect.onchange = () => {
-    const v = doctorGenderSelect.value;
-    state.genders.doctor = v;
-    localStorage.setItem('ll_gender_doctor', v);
-    if (lab2) lab2.textContent = t(v === 'auto' ? 'auto' : v);
-  };
+    doctorGenderSelect.value = state.genders.doctor || 'auto';
+    const lab2 = document.getElementById('doctor-gender');
+    if (lab2) lab2.textContent = t(doctorGenderSelect.value === 'auto' ? 'auto' : doctorGenderSelect.value);
+    doctorGenderSelect.onchange = () => {
+        const v = doctorGenderSelect.value;
+        state.genders.doctor = v;
+        localStorage.setItem('ll_gender_doctor', v);
+        if (lab2) lab2.textContent = t(v === 'auto' ? 'auto' : v);
+    };
 }
 
 $("#clear").onclick = () => {
-  const el = document.querySelector("#conversation-main");
-  if (el) el.innerHTML = `<p class="muted center">${t("empty")}</p>`;
-  document.querySelectorAll("[data-composer] input").forEach((input) => {
-    input.value = "";
-  });
-  setConversationStarted(false);
+    const el = document.querySelector("#conversation-main");
+    if (el) el.innerHTML = `<p class="muted center">${t("empty")}</p>`;
+    document.querySelectorAll("[data-composer] input").forEach((input) => {
+        input.value = "";
+    });
+    setConversationStarted(false);
 };
 
 const translationWorkspace = document.querySelector(".translation-workspace");
@@ -1217,37 +1215,37 @@ if (screenRoleSelect) {
         }
     };
     screenRoleSelect.onfocus = () => {
-        const room = document.querySelector("#room-code")?.value.trim().toUpperCase();
+        const room = document.querySelector("#room-code") ? .value.trim().toUpperCase();
         if (room) refreshAvailableRoles(room);
     };
 }
 setInterval(() => {
-    const room = document.querySelector("#room-code")?.value.trim().toUpperCase();
+    const room = document.querySelector("#room-code") ? .value.trim().toUpperCase();
     if (room) refreshAvailableRoles(room);
 }, 3000);
 
-$("#compare-btn").onclick = async () => {
-  const text = $("#compare-input").value.trim();
-  if (!text) return;
-  const res = await fetch(`${API}/api/compare`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text, source_language: "auto" }),
-  });
-  const data = await res.json();
-  const langsMap = (I18N[state.ui] && I18N[state.ui].languages) || {};
-  const rows = data.languages
-    .map(
-      (r) => {
-        const label = langsMap[r.language] || (r.language === "Ruhaya" ? "Kihaya / Ruhaya" : r.language);
-        return `<tr><td><strong>${escapeHtml(label)}</strong></td><td>${
+$("#compare-btn").onclick = async() => {
+    const text = $("#compare-input").value.trim();
+    if (!text) return;
+    const res = await fetch(`${API}/api/compare`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text, source_language: "auto" }),
+    });
+    const data = await res.json();
+    const langsMap = (I18N[state.ui] && I18N[state.ui].languages) || {};
+    const rows = data.languages
+        .map(
+            (r) => {
+                const label = langsMap[r.language] || (r.language === "Ruhaya" ? "Kihaya / Ruhaya" : r.language);
+                return `<tr><td><strong>${escapeHtml(label)}</strong></td><td>${
           r.translation ? escapeHtml(r.translation) : t("notFound")
         }</td></tr>`;
-      },
-    )
-    .join("");
-  const kiswahiliLabel = langsMap['Kiswahili'] || 'Kiswahili';
-  $("#compare-result").innerHTML = `<table><tr><td><strong>${escapeHtml(kiswahiliLabel)}</strong></td><td>${
+            },
+        )
+        .join("");
+    const kiswahiliLabel = langsMap['Kiswahili'] || 'Kiswahili';
+    $("#compare-result").innerHTML = `<table><tr><td><strong>${escapeHtml(kiswahiliLabel)}</strong></td><td>${
     data.kiswahili ? escapeHtml(data.kiswahili) : "—"
   }</td></tr>${rows}</table>`;
 };
@@ -1262,21 +1260,21 @@ seedConversationSample();
 
 // global theme toggle (applies to whole page)
 function applyTheme(theme, persist = true) {
-  document.body.setAttribute('data-theme', theme);
-  state.theme = theme;
-  if (persist) {
-    localStorage.setItem('ll_theme', theme);
-    localStorage.setItem('locallang-theme', theme);
-  }
-  document.querySelectorAll('.view[data-theme]').forEach((view) => {
-    view.dataset.theme = theme;
-  });
-  const lightBtn = document.getElementById('global-theme-light');
-  const darkBtn = document.getElementById('global-theme-dark');
-  if (lightBtn && darkBtn) {
-    lightBtn.classList.toggle('active', theme === 'light');
-    darkBtn.classList.toggle('active', theme === 'dark');
-  }
+    document.body.setAttribute('data-theme', theme);
+    state.theme = theme;
+    if (persist) {
+        localStorage.setItem('ll_theme', theme);
+        localStorage.setItem('locallang-theme', theme);
+    }
+    document.querySelectorAll('.view[data-theme]').forEach((view) => {
+        view.dataset.theme = theme;
+    });
+    const lightBtn = document.getElementById('global-theme-light');
+    const darkBtn = document.getElementById('global-theme-dark');
+    if (lightBtn && darkBtn) {
+        lightBtn.classList.toggle('active', theme === 'light');
+        darkBtn.classList.toggle('active', theme === 'dark');
+    }
 }
 
 const gLight = document.getElementById('global-theme-light');
@@ -1285,12 +1283,12 @@ if (gLight) gLight.onclick = () => applyTheme('light');
 if (gDark) gDark.onclick = () => applyTheme('dark');
 
 window.addEventListener("storage", (event) => {
-  if (event.key === "locallang-ui" && (event.newValue === "sw" || event.newValue === "en")) {
-    applyUILanguage(event.newValue, false);
-  }
-  if (event.key === "locallang-theme" && (event.newValue === "light" || event.newValue === "dark")) {
-    applyTheme(event.newValue, false);
-  }
+    if (event.key === "locallang-ui" && (event.newValue === "sw" || event.newValue === "en")) {
+        applyUILanguage(event.newValue, false);
+    }
+    if (event.key === "locallang-theme" && (event.newValue === "light" || event.newValue === "dark")) {
+        applyTheme(event.newValue, false);
+    }
 });
 
 // apply saved theme on load

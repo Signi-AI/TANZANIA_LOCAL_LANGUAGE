@@ -28,10 +28,6 @@
                     <img class="brand-logo" src="/tanlingo-wordmark.svg?v=8" alt="Tanlingo">
                     <span class="pill"><i class="dot"></i> CHATBOT</span>
                 </div>
-                <h1 data-i18n="tagline">Mtafsiri wa lugha za asili za Tanzania</h1>
-                <p class="lead" data-i18n="subtitle">
-                    Mgonjwa anaongea Kihaya, Sukuma au Kinyakyusa — daktari anasoma na kusikia Kiswahili papo hapo.
-                </p>
             </div>
         </div>
     </header>
@@ -43,7 +39,6 @@
                     <span class="room-link-icon" aria-hidden="true">⇄</span>
                     <div>
                         <p class="label" data-i18n="deviceCommunication">Mawasiliano ya vifaa viwili</p>
-                        <strong data-i18n="conversationRoom">Room ya mazungumzo</strong>
                     </div>
                 </div>
                 <p class="muted room-hint" data-i18n="roomHint">Tumia code hii kwenye simu na PC zote zilizo kwenye Wi-Fi moja.</p>
@@ -65,7 +60,6 @@
         <section class="card translation-workspace">
             <div class="conversation-panel-head">
                 <div>
-                    <p class="label" data-i18n="conversationRoom">Room ya mazungumzo</p>
                     <h2 data-i18n="conversationViews">Muonekano wa mazungumzo</h2>
                 </div>
                 <div class="conversation-head-actions">
@@ -266,8 +260,8 @@
                 document.querySelectorAll('.view[data-theme]').forEach(view => {
                     view.dataset.theme = theme;
                 });
-                document.getElementById('global-theme-light')?.classList.toggle('active', theme === 'light');
-                document.getElementById('global-theme-dark')?.classList.toggle('active', theme === 'dark');
+                document.getElementById('global-theme-light') ? .classList.toggle('active', theme === 'light');
+                document.getElementById('global-theme-dark') ? .classList.toggle('active', theme === 'dark');
             };
             document.querySelectorAll('[data-ui]').forEach(button => {
                 button.onclick = () => {
