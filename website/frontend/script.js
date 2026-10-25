@@ -81,8 +81,20 @@ function setupTheme() {
 function setupMobileMenu() {
     const button = document.getElementById("mobileMenu");
     const nav = document.getElementById("mobileNav");
-    button.addEventListener("click", () => nav.classList.toggle("hidden"));
-    nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => nav.classList.add("hidden")));
+    if (!button || !nav) return;
+
+    button.addEventListener("click", () => {
+        const isOpening = nav.classList.contains("hidden");
+        nav.classList.toggle("hidden", !isOpening);
+        button.setAttribute("aria-expanded", String(isOpening));
+        button.textContent = isOpening ? "✕" : "☰";
+    });
+
+    nav.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+        nav.classList.add("hidden");
+        button.setAttribute("aria-expanded", "false");
+        button.textContent = "☰";
+    }));
 }
 
 function setupReveal() {
@@ -284,46 +296,4 @@ document.addEventListener("DOMContentLoaded", () => {
     setupReveal();
     setupLanguageSelector();
     document.querySelectorAll("img").forEach(imageFallback);
-});
-document.addEventListener("DOMContentLoaded", () => {
-
-    const mobileMenu = document.getElementById("mobileMenu");
-    const mobileNav = document.getElementById("mobileNav");
-
-    if (!mobileMenu || !mobileNav) return;
-
-    mobileMenu.addEventListener("click", () => {
-
-        const isOpen = !mobileNav.classList.contains("hidden");
-
-        mobileNav.classList.toggle("hidden");
-
-        mobileMenu.setAttribute(
-            "aria-expanded",
-            String(!isOpen)
-        );
-
-        // Change icon
-        mobileMenu.textContent = isOpen ? "☰" : "✕";
-    });
-
-
-    // Close menu after clicking a link
-    mobileNav.querySelectorAll("a").forEach(link => {
-
-        link.addEventListener("click", () => {
-
-            mobileNav.classList.add("hidden");
-
-            mobileMenu.textContent = "☰";
-
-            mobileMenu.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-        });
-
-    });
-
 });

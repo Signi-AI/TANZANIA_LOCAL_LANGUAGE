@@ -18,6 +18,8 @@ const I18N = {
         settings: "Mipangilio",
         preferences: "Lugha na mwonekano",
         deviceCommunication: "Mawasiliano ya vifaa viwili",
+        conversationRoom: "Room ya mazungumzo",
+        conversationViews: "Muonekano wa mazungumzo",
         roomHint: "Tumia code hii kwenye simu na PC zote zilizo kwenye Wi-Fi moja.",
         roomCode: "Code ya room",
         screenRole: "Aina ya screen",
@@ -62,6 +64,7 @@ const I18N = {
         low: "Chini",
         notFound: "Haikupatikana kwenye dataset",
         compare: "Linganisha lugha",
+        compareAction: "Linganisha",
         compareHint: "Andika neno kisha uone jinsi linavyosemwa kwa lugha zote.",
         empty: "Mazungumzo yataonekana hapa. Anza kwa kubonyeza maikrofoni.",
         verify: "Hakiki na mzawa",
@@ -103,6 +106,7 @@ const I18N = {
         settings: "Settings",
         preferences: "Language & appearance",
         deviceCommunication: "Two-device communication",
+        conversationRoom: "Conversation room",
         roomHint: "Use this code on the phone and PC connected to the same Wi-Fi.",
         roomCode: "Room code",
         screenRole: "Screen role",
@@ -148,6 +152,7 @@ const I18N = {
         low: "Low",
         notFound: "Not found in dataset",
         compare: "Compare languages",
+        compareAction: "Compare",
         compareHint: "Type a word and see how it is said across the languages.",
         empty: "The conversation will appear here. Start by tapping the microphone.",
         verify: "Verify with a native speaker",
@@ -284,7 +289,7 @@ function updateConversationViewLabels() {
 }
 
 function getActiveScreenSide() {
-    return document.querySelector("#screen-role") ? .value || "patient";
+    return document.querySelector("#screen-role")?.value || "patient";
 }
 
 function updateActiveScreenPanel() {
@@ -1215,12 +1220,12 @@ if (screenRoleSelect) {
         }
     };
     screenRoleSelect.onfocus = () => {
-        const room = document.querySelector("#room-code") ? .value.trim().toUpperCase();
+        const room = document.querySelector("#room-code")?.value.trim().toUpperCase();
         if (room) refreshAvailableRoles(room);
     };
 }
 setInterval(() => {
-    const room = document.querySelector("#room-code") ? .value.trim().toUpperCase();
+    const room = document.querySelector("#room-code")?.value.trim().toUpperCase();
     if (room) refreshAvailableRoles(room);
 }, 3000);
 

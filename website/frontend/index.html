@@ -61,7 +61,6 @@
         <section class="card translation-workspace">
             <div class="conversation-panel-head">
                 <div>
-                    <p class="label" data-i18n="conversationRoom">Room ya mazungumzo</p>
                     <h2 data-i18n="conversationViews">Muonekano wa mazungumzo</h2>
                 </div>
                 <div class="conversation-head-actions">
@@ -234,7 +233,7 @@
             <p class="muted" data-i18n="compareHint">Andika neno kisha uone jinsi linavyosemwa kwa lugha zote.</p>
             <div class="row">
                 <input type="text" id="compare-input" placeholder="Andika hapa…" data-i18n-ph="typeHere">
-                <button type="button" class="primary flag-gradient" id="compare-btn" data-i18n="compare">Linganisha lugha</button>
+                <button type="button" class="primary flag-gradient" id="compare-btn" data-i18n="compareAction">Linganisha</button>
             </div>
             <div id="compare-result"></div>
         </section>
@@ -249,7 +248,7 @@
             window.setTimeout(() => splash.remove(), 700);
         }, 1200);
     </script>
-    <script src="/static/app.js?v=global-conversation-settings-v2"></script>
+    <script src="/static/app.js?v=global-conversation-settings-v3"></script>
     <script>
         // Minimal fallback: if main app failed to initialize, attach simple handlers so UI remains usable.
         (function() {
@@ -262,8 +261,8 @@
                 document.querySelectorAll('.view[data-theme]').forEach(view => {
                     view.dataset.theme = theme;
                 });
-                document.getElementById('global-theme-light') ? .classList.toggle('active', theme === 'light');
-                document.getElementById('global-theme-dark') ? .classList.toggle('active', theme === 'dark');
+                document.getElementById('global-theme-light')?.classList.toggle('active', theme === 'light');
+                document.getElementById('global-theme-dark')?.classList.toggle('active', theme === 'dark');
             };
             document.querySelectorAll('[data-ui]').forEach(button => {
                 button.onclick = () => {
@@ -290,7 +289,16 @@
                     if (!text) return;
                     input.value = '';
                     const conversationBox = document.getElementById('conversation-main');
-                    conversationBox && conversationBox.insertAdjacentHTML('beforeend', `<div class="bubble ${side}"><p class="orig">${text}</p><p class="trans">…</p></div>`);
+                    const bubble = document.createElement('div');
+                    bubble.className = `bubble ${side}`;
+                    const original = document.createElement('p');
+                    original.className = 'orig';
+                    original.textContent = text;
+                    const translation = document.createElement('p');
+                    translation.className = 'trans';
+                    translation.textContent = '…';
+                    bubble.append(original, translation);
+                    conversationBox && conversationBox.appendChild(bubble);
                     try {
                         const sourceSelect = document.getElementById(`${side}-language-select`);
                         const targetSelect = document.getElementById(`${side === 'patient' ? 'doctor' : 'patient'}-language-select`);
@@ -308,63 +316,10 @@
                             })
                         });
                         const data = await res.json();
-                        conversationBox && conversationBox.insertAdjacentHTML('beforeend', `<div class="bubble ${side}"><p class="orig">${text}</p><p class="trans">${data.translation||data.message||'—'}</p></div>`);
+                        translation.textContent = data.translation || data.message || '—';
                     } catch (e) {
-                        conversationBox && conversationBox.insertAdjacentHTML('beforeend', `<div class="bubble ${side}"><p class="orig">${text}</p><p class="warn">Offline or error</p></div>`);
-                    }
-                });
-            });
-        })();
-        // Ensure send buttons have a minimal handler even if app.js partially failed.
-        (function() {
-            Array.from(document.querySelectorAll('[data-send]')).forEach(btn => {
-                if (btn._ll_min_handler) return; // already attached
-                btn._ll_min_handler = true;
-                btn.addEventListener('click', async function() {
-                    try {
-                        // If app's submit exists, use it
-                        if (window.submit && typeof window.submit === 'function') {
-                            const side = btn.dataset.send;
-                            const input = document.querySelector(`#input-${side}`);
-                            if (!input) return;
-                            const text = input.value.trim();
-                            if (!text) return;
-                            input.value = '';
-                            window.submit(side, text);
-                            return;
-                        }
-                    } catch (e) {
-                        console.debug('min handler submit failed', e);
-                    }
-                    // fallback simple behaviour (same as above)
-                    const side = btn.dataset.send;
-                    const input = document.querySelector(`#input-${side}`);
-                    if (!input) return;
-                    const text = input.value.trim();
-                    if (!text) return;
-                    input.value = '';
-                    const conversationBox = document.getElementById('conversation-main');
-                    conversationBox && conversationBox.insertAdjacentHTML('beforeend', `<div class="bubble ${side}"><p class="orig">${text}</p><p class="trans">…</p></div>`);
-                    try {
-                        const sourceSelect = document.getElementById(`${side}-language-select`);
-                        const targetSelect = document.getElementById(`${side === 'patient' ? 'doctor' : 'patient'}-language-select`);
-                        const source = sourceSelect ? sourceSelect.value : (side === 'patient' ? 'Ruhaya' : 'Kiswahili');
-                        const target = targetSelect ? targetSelect.value : (side === 'patient' ? 'Kiswahili' : 'Ruhaya');
-                        const res = await fetch('/api/translate', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                text,
-                                source_language: source,
-                                target_language: target
-                            })
-                        });
-                        const data = await res.json();
-                        conversationBox && conversationBox.insertAdjacentHTML('beforeend', `<div class="bubble ${side}"><p class="orig">${text}</p><p class="trans">${data.translation||data.message||'—'}</p></div>`);
-                    } catch (e) {
-                        conversationBox && conversationBox.insertAdjacentHTML('beforeend', `<div class="bubble ${side}"><p class="orig">${text}</p><p class="warn">Offline or error</p></div>`);
+                        translation.className = 'warn';
+                        translation.textContent = 'Offline or error';
                     }
                 });
             });
