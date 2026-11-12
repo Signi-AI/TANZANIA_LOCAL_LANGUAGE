@@ -4,16 +4,30 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tanlingo — Mtafsiri wa lugha za Tanzania</title>
     <meta name="description" content="Tafsiri ya papo kwa papo kati ya Sukuma, Kihaya/Ruhaya, Kinyakyusa na Kiswahili kwa sauti au maandishi.">
-    <link rel="icon" type="image/svg+xml" href="/tanlingo.svg?v=5">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Tanlingo">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="apple-touch-icon" href="/logo.png">
+    <link rel="icon" type="image/svg+xml" href="/tanlingo-app-icon.svg">
+    <title>Tanlingo — Mtafsiri wa lugha za Tanzania</title>
     <link rel="stylesheet" href="styles.css?v=tanlingo-v6">
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js').catch(() => {});
+            });
+        }
+    </script>
 </head>
 
 <body>
     <section class="splash-screen" id="chatbot-splash" aria-label="Tanlingo inafunguka">
         <div class="splash-content">
-            <img class="splash-logo" src="/tanlingo-wordmark.svg?v=8" alt="Tanlingo">
+            <img class="splash-logo" src="/tanlingo-app-icon.svg" alt="Tanlingo">
             <p class="splash-guide">Mawasiliano ya lugha za Tanzania, kwa urahisi.</p>
         </div>
     </section>
@@ -160,8 +174,7 @@
                             <option value="Msaidizi">Msaidizi</option>
                             <option value="Custom">Custom</option>
                         </select>
-                            
-                        <p class="muted" id="doctor-lang-label">Kiswahili</p>
+                            <p class="muted" id="doctor-lang-label">Kiswahili</p>
                             <div class="small">
                                 <label class="muted" for="doctor-language-select" data-i18n="conversationLanguage">Lugha ya mazungumzo:</label>
                                 <select id="doctor-language-select" class="lang-select">
@@ -179,8 +192,7 @@
                                 <option value="English">English</option>
                                 <option value="French">French</option>
                             </select>
-                            
-                        </div>
+                            </div>
                             <div class="small">
                                 <label class="muted"><span data-i18n="gender">Jinsia</span>: <span id="doctor-gender">Auto</span></label>
                                 <select id="doctor-gender-select" class="gender-select">
@@ -263,8 +275,8 @@
                 document.querySelectorAll('.view[data-theme]').forEach(view => {
                     view.dataset.theme = theme;
                 });
-                document.getElementById('global-theme-light')?.classList.toggle('active', theme === 'light');
-                document.getElementById('global-theme-dark')?.classList.toggle('active', theme === 'dark');
+                document.getElementById('global-theme-light') ? .classList.toggle('active', theme === 'light');
+                document.getElementById('global-theme-dark') ? .classList.toggle('active', theme === 'dark');
             };
             document.querySelectorAll('[data-ui]').forEach(button => {
                 button.onclick = () => {
