@@ -1,4 +1,4 @@
-const CACHE_NAME = "tanlingo-shell-v1";
+const CACHE_NAME = "tanlingo-shell-v2";
 const APP_SHELL = [
     "/",
     "/home.html",
