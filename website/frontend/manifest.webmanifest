@@ -1,0 +1,35 @@
+{
+  "id": "/home.html",
+  "name": "Tanlingo — Lugha za Tanzania",
+  "short_name": "Tanlingo",
+  "description": "Mawasiliano na tafsiri za lugha za Tanzania.",
+  "lang": "sw-TZ",
+  "start_url": "/home.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#061c2b",
+  "theme_color": "#061c2b",
+  "icons": [
+    {
+      "src": "/tanlingo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Fungua mtafsiri",
+      "short_name": "Mtafsiri",
+      "url": "/index.html",
+      "icons": [
+        {
+          "src": "/tanlingo.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ]
+}

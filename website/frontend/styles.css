@@ -147,7 +147,7 @@ body[data-theme="dark"] {
     height: 100%;
     border-radius: inherit;
     background: linear-gradient(90deg, #34d399, #59d9ff);
-    animation: splash-progress 10s linear both;
+    animation: splash-progress 7s linear both;
 }
 
 .splash-progress-meta {
@@ -2937,5 +2937,471 @@ body[data-theme="dark"] .role-global-controls .theme-global .small {
     .brand-logo {
         width: 150px;
         height: 50px;
+    }
+}
+
+.splash-screen .splash-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(520px, 100%);
+    padding: clamp(28px, 6vw, 48px) clamp(22px, 6vw, 42px);
+    border: 1px solid rgba(194, 240, 226, .18);
+    border-radius: 30px;
+    background: linear-gradient(150deg, rgba(12, 31, 48, .97), rgba(8, 24, 39, .96));
+    box-shadow: 0 34px 110px rgba(0, 0, 0, .48), inset 0 1px 0 rgba(255, 255, 255, .09);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+}
+
+.splash-app-mark {
+    display: grid;
+    width: 112px;
+    height: 112px;
+    place-items: center;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, .24);
+    border-radius: 30px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, .18), rgba(255, 255, 255, .06));
+    box-shadow: 0 18px 42px rgba(0, 0, 0, .28), inset 0 1px 0 rgba(255, 255, 255, .24);
+}
+
+.splash-app-icon {
+    display: block;
+    width: 86px;
+    height: 86px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .3));
+    animation: splash-mark-drop 1.65s cubic-bezier(.2, .78, .2, 1.2) .12s both,
+        splash-mark-float 3.8s ease-in-out 2.2s infinite;
+}
+
+.splash-scene {
+    position: relative;
+    display: grid;
+    width: min(250px, 72vw);
+    height: 150px;
+    place-items: start center;
+    margin-bottom: 4px;
+    isolation: isolate;
+}
+
+.splash-scene::before {
+    position: absolute;
+    z-index: -1;
+    top: 8px;
+    width: 184px;
+    height: 112px;
+    border-radius: 50%;
+    background: rgba(36, 166, 204, .12);
+    content: "";
+    filter: blur(35px);
+}
+
+.splash-scene .splash-app-mark {
+    position: relative;
+    z-index: 1;
+    width: 94px;
+    height: 94px;
+    margin: 0;
+    border-color: rgba(224, 245, 255, .46);
+    border-radius: 27px;
+    background: linear-gradient(145deg, rgba(231, 247, 255, .25), rgba(64, 154, 189, .16));
+    box-shadow: 0 16px 38px rgba(0, 0, 0, .34), inset 0 1px 0 rgba(255, 255, 255, .36);
+}
+
+.splash-scene .splash-app-icon {
+    width: 72px;
+    height: 72px;
+}
+
+.splash-waterline {
+    position: absolute;
+    z-index: 2;
+    bottom: 20px;
+    left: 50%;
+    width: 122px;
+    height: 2px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, transparent, #8cecff 24%, #fff 50%, #8cecff 76%, transparent);
+    box-shadow: 0 0 12px rgba(107, 227, 255, .9), 0 0 30px rgba(45, 181, 234, .62);
+    transform: translateX(-50%);
+}
+
+.splash-ripple {
+    position: absolute;
+    z-index: 2;
+    bottom: 8px;
+    left: 50%;
+    width: 38px;
+    height: 11px;
+    border: 2px solid rgba(146, 239, 255, .95);
+    border-radius: 50%;
+    opacity: 0;
+    transform: translateX(-50%) scale(.25, .6);
+    animation: splash-ripple-expand 2.8s ease-out 1.25s infinite;
+}
+
+.splash-ripple-two {
+    animation-delay: 1.58s;
+}
+
+.splash-spray {
+    position: absolute;
+    z-index: 2;
+    bottom: 23px;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #d7fbff;
+    box-shadow: 0 0 10px #6de5ff;
+    opacity: 0;
+    animation: splash-water-spray .65s ease-out 1.26s both;
+}
+
+.splash-spray-one { --spray-x: -30px; --spray-y: -24px; }
+.splash-spray-two { --spray-x: 2px; --spray-y: -34px; animation-delay: 1.3s; }
+.splash-spray-three { --spray-x: 32px; --spray-y: -22px; animation-delay: 1.34s; }
+
+.splash-screen .splash-eyebrow {
+    margin: 0 0 10px;
+    color: #a7eaff;
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .16em;
+    opacity: 0;
+    animation: splash-text-rise .65s ease-out 1.8s forwards;
+}
+
+.splash-screen .splash-title {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(2rem, 7vw, 2.8rem);
+    font-weight: 850;
+    letter-spacing: -.045em;
+    line-height: 1.05;
+}
+
+.splash-wordmark {
+    display: inline-flex;
+    color: #fff;
+    text-shadow: 0 0 28px rgba(76, 195, 234, .28);
+}
+
+.splash-wordmark > span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(14px);
+    animation: splash-letter-arrive .42s cubic-bezier(.2, .8, .2, 1) forwards;
+}
+
+.splash-wordmark > span:nth-child(1) { animation-delay: 1.78s; }
+.splash-wordmark > span:nth-child(2) { animation-delay: 1.88s; }
+.splash-wordmark > span:nth-child(3) { animation-delay: 1.98s; }
+.splash-wordmark > span:nth-child(4) { animation-delay: 2.08s; }
+.splash-wordmark > span:nth-child(5) { animation-delay: 2.18s; }
+.splash-wordmark > span:nth-child(6) { animation-delay: 2.28s; }
+.splash-wordmark > span:nth-child(7) { animation-delay: 2.38s; }
+.splash-wordmark > span:nth-child(8) { animation-delay: 2.48s; }
+
+.splash-screen .splash-description {
+    max-width: 340px;
+    margin: 12px 0 22px;
+    color: rgba(235, 248, 246, .78);
+    font-size: .95rem;
+    line-height: 1.65;
+    opacity: 0;
+    animation: splash-text-rise .65s ease-out 2.5s forwards;
+}
+
+.splash-screen .splash-guide {
+    margin-top: 20px;
+}
+
+#chatbot-splash .splash-guide {
+    color: rgba(235, 248, 255, .9);
+}
+
+.splash-progress-wrap {
+    margin-top: 20px;
+}
+
+.splash-progress {
+    background: rgba(197, 232, 247, .18);
+}
+
+.splash-progress span {
+    background: linear-gradient(90deg, #39d6bb, #5edbff, #fff1a8);
+    box-shadow: 0 0 18px rgba(74, 209, 240, .58);
+}
+
+.splash-progress-meta,
+.splash-progress-meta span {
+    color: rgba(224, 241, 250, .85) !important;
+}
+
+.splash-content::before {
+    background: linear-gradient(90deg, transparent, #45d6ca 30%, #fff 50%, #65caff 74%, transparent);
+}
+
+@keyframes splash-mark-drop {
+    0% { opacity: 0; transform: translateY(-190px) rotate(-12deg) scale(.72); }
+    58% { opacity: 1; transform: translateY(13px) rotate(3deg) scale(1.05); }
+    72% { transform: translateY(-9px) rotate(-1deg) scale(.98); }
+    86% { transform: translateY(4px) rotate(0) scale(1.01); }
+    100% { opacity: 1; transform: translateY(0) rotate(0) scale(1); }
+}
+
+@keyframes splash-mark-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+@keyframes splash-ripple-expand {
+    0% { opacity: .9; transform: translateX(-50%) scale(.25, .55); }
+    75%, 100% { opacity: 0; transform: translateX(-50%) scale(3.2, 1.25); }
+}
+
+@keyframes splash-water-spray {
+    0% { opacity: 0; transform: translate(0, 0) scale(.5); }
+    20% { opacity: 1; }
+    100% { opacity: 0; transform: translate(var(--spray-x), var(--spray-y)) scale(.15); }
+}
+
+@keyframes splash-text-rise {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes splash-letter-arrive {
+    0% { opacity: 0; transform: translateY(14px) scale(.8); }
+    72% { opacity: 1; transform: translateY(-3px) scale(1.08); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .splash-app-icon,
+    .splash-wordmark > span,
+    .splash-eyebrow,
+    .splash-description {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .splash-ripple,
+    .splash-spray {
+        display: none;
+    }
+}
+
+.install-app-button {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 0 17px;
+    border: 1px solid rgba(15, 118, 79, .24);
+    border-radius: 13px;
+    color: #073927;
+    background: linear-gradient(135deg, #a9f0c9, #f8d978);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .18), inset 0 1px 0 rgba(255, 255, 255, .65);
+    font: inherit;
+    font-size: .875rem;
+    font-weight: 800;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+
+.install-app-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .24), inset 0 1px 0 rgba(255, 255, 255, .65);
+    filter: saturate(1.08);
+}
+
+.install-app-button:focus-visible,
+.install-help-close:focus-visible {
+    outline: 3px solid #59d9ff;
+    outline-offset: 3px;
+}
+
+.install-app-button svg {
+    width: 19px;
+    height: 19px;
+    flex: 0 0 auto;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+}
+
+.splash-install-button {
+    min-height: 50px;
+    padding: 0 22px;
+    font-size: .95rem;
+}
+
+.splash-install-hint {
+    margin: 10px 0 0;
+    color: rgba(235, 248, 246, .6);
+    font-size: .75rem;
+}
+
+.install-nav-button {
+    min-height: 40px;
+    padding: 0 13px;
+    border-radius: 11px;
+    font-size: .8rem;
+    white-space: nowrap;
+}
+
+.install-mobile-button {
+    justify-content: flex-start;
+    width: 100%;
+    min-height: 46px;
+    margin-bottom: 7px;
+    padding: 0 16px;
+}
+
+.index-install-button {
+    margin-left: auto;
+}
+
+.install-help-dialog {
+    width: min(500px, calc(100% - 28px));
+    max-width: 500px;
+    max-height: min(82dvh, 680px);
+    padding: 24px;
+    overflow-y: auto;
+    border: 1px solid rgba(13, 148, 136, .2);
+    border-radius: 24px;
+    color: #123f45;
+    background: #f8fffd;
+    box-shadow: 0 28px 90px rgba(0, 0, 0, .35);
+}
+
+.install-help-dialog::backdrop {
+    background: rgba(3, 17, 21, .72);
+    backdrop-filter: blur(5px);
+}
+
+.install-help-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.install-help-heading img {
+    flex: 0 0 42px;
+}
+
+.install-help-eyebrow {
+    margin: 0 0 3px;
+    color: #0d8060;
+    font-size: .65rem;
+    font-weight: 850;
+    letter-spacing: .13em;
+}
+
+.install-help-heading h2 {
+    margin: 0;
+    font-size: 1.12rem;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.install-help-close {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    place-items: center;
+    margin-left: auto;
+    border: 1px solid rgba(13, 148, 136, .18);
+    border-radius: 11px;
+    color: #123f45;
+    background: white;
+    font-size: 1.45rem;
+    cursor: pointer;
+}
+
+.install-help-intro,
+.install-help-note {
+    color: #557276;
+    font-size: .88rem;
+    line-height: 1.6;
+}
+
+.install-help-intro {
+    margin: 18px 0;
+}
+
+.install-platform {
+    margin-top: 12px;
+    padding: 15px 16px;
+    border: 1px solid rgba(13, 148, 136, .15);
+    border-radius: 16px;
+    background: white;
+}
+
+.install-platform h3 {
+    margin: 0 0 8px;
+    color: #0d5b4f;
+    font-size: .92rem;
+}
+
+.install-platform ol {
+    margin: 0;
+    padding-left: 20px;
+    color: #375b60;
+    font-size: .84rem;
+    line-height: 1.65;
+}
+
+.install-platform li + li {
+    margin-top: 4px;
+}
+
+.install-help-note {
+    margin: 16px 0 0;
+    font-size: .78rem;
+}
+
+@media (max-width: 680px) {
+    .install-nav-button {
+        min-height: 38px;
+        padding: 0 10px;
+        font-size: .75rem;
+    }
+
+    .index-install-button {
+        align-self: flex-start;
+    }
+}
+
+@media (max-width: 380px) {
+    .splash-screen .splash-content {
+        padding: 26px 18px;
+        border-radius: 24px;
+    }
+
+    .splash-app-mark {
+        width: 92px;
+        height: 92px;
+        margin-bottom: 15px;
+        border-radius: 25px;
+    }
+
+    .splash-app-icon {
+        width: 72px;
+        height: 72px;
+    }
+
+    .install-help-dialog {
+        padding: 18px;
     }
 }

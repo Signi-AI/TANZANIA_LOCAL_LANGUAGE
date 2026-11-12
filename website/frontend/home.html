@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Tanlingo — mawasiliano na teknolojia kwa lugha za Tanzania.">
+    <meta name="theme-color" content="#061c2b">
     <title>Tanlingo</title>
     <link rel="icon" type="image/svg+xml" href="/tanlingo.svg?v=5">
+    <link rel="manifest" href="/manifest.webmanifest">
     <link rel="stylesheet" href="styles.css?v=tanlingo-v8">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -75,7 +77,7 @@
         }
         
         .float-a {
-            animation: floatA 5s ease-in-out infinite;
+            animation: floatA             7s ease-in-out infinite;
         }
         
         .float-b {
@@ -439,7 +441,7 @@
             min-height: 100dvh;
             padding: 24px;
             overflow: hidden;
-            background: radial-gradient(ellipse at 14% 18%, rgba(31, 174, 109, .28), transparent 36%), radial-gradient(ellipse at 88% 20%, rgba(27, 109, 193, .3), transparent 37%), radial-gradient(ellipse at 72% 88%, rgba(247, 201, 76, .17), transparent 35%), linear-gradient(132deg, #031511 0%, #061c2b 48%, #071827 72%, #04120f 100%);
+            background: radial-gradient(ellipse at 50% 12%, rgba(24, 105, 151, .34), transparent 42%), radial-gradient(ellipse at 12% 90%, rgba(13, 104, 78, .24), transparent 38%), linear-gradient(145deg, #07111f 0%, #0b1c2d 52%, #071522 100%);
             transition: opacity .7s ease, visibility .7s ease;
         }
         
@@ -448,9 +450,9 @@
             position: absolute;
             width: min(680px, 85vw);
             aspect-ratio: 1;
-            border: 1px solid rgba(139, 227, 203, .19);
+            border: 1px solid rgba(135, 205, 230, .13);
             border-radius: 50%;
-            box-shadow: 0 0 80px rgba(31, 174, 109, .1), 0 0 0 55px rgba(255, 255, 255, .025), 0 0 0 110px rgba(89, 217, 255, .018);
+            box-shadow: 0 0 80px rgba(47, 171, 212, .1), 0 0 0 55px rgba(255, 255, 255, .018), 0 0 0 110px rgba(89, 217, 255, .012);
             animation: splashPulse 4s ease-in-out infinite;
         }
         
@@ -458,7 +460,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background-image: linear-gradient(rgba(219, 255, 245, .025) 1px, transparent 1px), linear-gradient(90deg, rgba(219, 255, 245, .025) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(219, 239, 255, .018) 1px, transparent 1px), linear-gradient(90deg, rgba(219, 239, 255, .018) 1px, transparent 1px);
             background-size: 52px 52px;
             mask-image: radial-gradient(ellipse at center, #000 8%, transparent 76%);
             pointer-events: none;
@@ -545,7 +547,7 @@
             border-radius: inherit;
             background: linear-gradient(90deg, #1fae6d 0%, #f7c94c 54%, #1b6dc1 100%);
             box-shadow: 0 0 18px rgba(52, 211, 153, .42);
-            animation: splashLoading 5s linear forwards;
+            animation: splashLoading 7s linear forwards;
         }
         
         .splash-progress-meta {
@@ -1037,7 +1039,25 @@
 <body class="bg-white text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-white">
     <section class="splash-screen" id="splash-screen" aria-label="Tanlingo inafunguka">
         <div class="splash-content">
-            <img class="splash-logo" src="/tanlingo-wordmark.svg?v=8" alt="Tanlingo">
+            <div class="splash-scene">
+                <span class="splash-waterline" aria-hidden="true"></span>
+                <span class="splash-ripple splash-ripple-one" aria-hidden="true"></span>
+                <span class="splash-ripple splash-ripple-two" aria-hidden="true"></span>
+                <span class="splash-spray splash-spray-one" aria-hidden="true"></span>
+                <span class="splash-spray splash-spray-two" aria-hidden="true"></span>
+                <span class="splash-spray splash-spray-three" aria-hidden="true"></span>
+                <div class="splash-app-mark">
+                    <img class="splash-app-icon" src="/tanlingo.svg" alt="Nembo ya Tanlingo">
+                </div>
+            </div>
+            <p class="splash-eyebrow">LUGHA ZA TANZANIA, KWA URAHISI</p>
+            <h1 class="splash-title" aria-label="Tanlingo"><span class="splash-wordmark" aria-hidden="true"><span>T</span><span>a</span><span>n</span><span>l</span><span>i</span><span>n</span><span>g</span><span>o</span></span></h1>
+            <p class="splash-description">Wasiliana na tafsiri za lugha za Tanzania, popote ulipo.</p>
+            <button type="button" class="install-app-button splash-install-button" data-install-app>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 15v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg>
+                Sakinisha Tanlingo
+            </button>
+            <p class="splash-install-hint">Ongeza shortcut kwenye simu au kompyuta yako</p>
             <div class="splash-guide" aria-live="polite">
                 <span>Chagua role yako</span>
                 <span>Weka lugha ya mazungumzo</span>
@@ -1048,11 +1068,48 @@
                 <div class="splash-progress" aria-hidden="true"><span></span></div>
                 <div class="splash-progress-meta">
                     <span id="splash-percent">0%</span>
-                    <span id="splash-seconds">5s</span>
+                    <span id="splash-seconds">7s</span>
                 </div>
             </div>
         </div>
     </section>
+
+    <dialog class="install-help-dialog" id="install-help" aria-labelledby="install-help-title">
+        <div class="install-help-heading">
+            <img src="/tanlingo.svg" alt="" width="42" height="42">
+            <div>
+                <p class="install-help-eyebrow">TANLINGO APP</p>
+                <h2 id="install-help-title">Ongeza Tanlingo kwenye kifaa</h2>
+            </div>
+            <button type="button" class="install-help-close" data-close-install aria-label="Funga maelekezo">×</button>
+        </div>
+        <p class="install-help-intro">Chagua kifaa chako, kisha fuata hatua hizi ili kuweka shortcut kwenye skrini yako.</p>
+        <section class="install-platform" data-install-platform="android">
+            <h3>Android · Chrome</h3>
+            <ol>
+                <li>Gusa menyu ya nukta tatu <strong>⋮</strong> kwenye Chrome.</li>
+                <li>Chagua <strong>Install app</strong> au <strong>Add to Home screen</strong>.</li>
+                <li>Thibitisha kwa kugusa <strong>Install</strong> au <strong>Add</strong>.</li>
+            </ol>
+        </section>
+        <section class="install-platform" data-install-platform="ios">
+            <h3>iPhone au iPad · Safari</h3>
+            <ol>
+                <li>Gusa kitufe cha <strong>Share</strong> kwenye Safari.</li>
+                <li>Chagua <strong>Add to Home Screen</strong>.</li>
+                <li>Gusa <strong>Add</strong> ili kuweka Tanlingo kwenye skrini.</li>
+            </ol>
+        </section>
+        <section class="install-platform" data-install-platform="desktop">
+            <h3>Kompyuta · Chrome au Edge</h3>
+            <ol>
+                <li>Bonyeza alama ya kusakinisha iliyo pembeni ya address bar; au fungua menyu ya kivinjari <strong>⋮</strong>.</li>
+                <li>Chagua <strong>Install Tanlingo</strong> au <strong>Install this site as an app</strong>.</li>
+                <li>Thibitisha kusakinisha. Tanlingo itafunguka kama app tofauti.</li>
+            </ol>
+        </section>
+        <p class="install-help-note">Tumia Chrome, Edge au Safari na uhakikishe uko kwenye HTTPS ili kusakinisha.</p>
+    </dialog>
 
     <header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/90">
         <div class="mx-auto flex min-h-[72px] max-w-7xl items-center gap-4 px-5 sm:px-8">
@@ -1067,6 +1124,10 @@
                     data-i18n="nav.start">
         Anza kutumia →
     </a>
+                <button type="button" class="install-app-button install-nav-button" data-install-app>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 15v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg>
+                    Sakinisha
+                </button>
 
             </nav>
 
@@ -1095,6 +1156,10 @@
         <nav id="mobileNav" class="hidden border-t border-slate-200 bg-white/95 px-5 py-4 shadow-lg backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/95">
 
             <div class="mx-auto flex max-w-7xl flex-col gap-1">
+                <button type="button" class="install-app-button install-mobile-button" data-install-app>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 15v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg>
+                    Sakinisha Tanlingo kwenye kifaa
+                </button>
                 <a href="https://pypi.org/project/Tan-language/" class="rounded-xl px-4 py-3 text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-800" data-i18n="nav.maktaba">
         Maktaba
     </a>
@@ -1378,6 +1443,7 @@
     </footer>
 
     <script src="script.js?v=shared-settings-v7"></script>
+    <script src="/static/install.js" defer></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
 
@@ -1386,7 +1452,7 @@
 
             if (!splashScreen) return;
 
-            const splashDuration = 5000;
+            const splashDuration = 7000;
 
             /*
              * =====================================================
@@ -1455,7 +1521,7 @@
                 }, 100);
 
 
-                // Ondoa splash baada ya sekunde 5
+                // Ondoa splash baada ya sekunde 7
                 setTimeout(() => {
 
                     clearInterval(progressTimer);
@@ -1500,45 +1566,7 @@
 
                         splash.className = "splash-screen";
 
-                        splash.innerHTML = `
-                    <div class="splash-content">
-
-                        <img
-                            class="splash-logo"
-                            src="/tanlingo-wordmark.svg?v=8"
-                            alt="Nembo ya Tanlingo"
-                        >
-
-                        <div class="splash-guide">
-                            <span>Chagua role yako</span>
-                            <span>Weka lugha ya mazungumzo</span>
-                            <span>Andika au bonyeza microphone</span>
-                            <span>Pokea tafsiri papo hapo</span>
-                        </div>
-
-                        <div class="splash-progress-wrap">
-
-                            <div
-                                class="splash-progress"
-                                aria-hidden="true"
-                            >
-                                <span></span>
-                            </div>
-
-                            <div class="splash-progress-meta">
-                                <span id="splash-percent">
-                                    0%
-                                </span>
-
-                                <span id="splash-seconds">
-                                    5s
-                                </span>
-                            </div>
-
-                        </div>
-
-                    </div>
-                `;
+                            splash.innerHTML = splashScreen.querySelector(".splash-content").outerHTML;
 
                         document.body.appendChild(splash);
                     }
@@ -1562,7 +1590,7 @@
                         void progress.offsetWidth;
 
                         progress.style.animation =
-                            "splashLoading 5s linear forwards";
+                            "splashLoading 7s linear forwards";
                     }
 
                     // Anza countdown mpya
@@ -1586,14 +1614,14 @@
                         const value = Math.min(
                             100,
                             Math.round(
-                                (elapsed / 5000) * 100
+                                (elapsed / splashDuration) * 100
                             )
                         );
 
                         const left = Math.max(
                             0,
                             Math.ceil(
-                                (5000 - elapsed) / 1000
+                                (splashDuration - elapsed) / 1000
                             )
                         );
 
@@ -1624,7 +1652,7 @@
 
                         }, 700);
 
-                    }, 5000);
+                    }, splashDuration);
 
                 });
 

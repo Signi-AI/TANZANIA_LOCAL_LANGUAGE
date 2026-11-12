@@ -6,17 +6,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tanlingo — Mtafsiri wa lugha za Tanzania</title>
     <meta name="description" content="Tafsiri ya papo kwa papo kati ya Sukuma, Kihaya/Ruhaya, Kinyakyusa na Kiswahili kwa sauti au maandishi.">
+    <meta name="theme-color" content="#061c2b">
     <link rel="icon" type="image/svg+xml" href="/tanlingo.svg?v=5">
+    <link rel="manifest" href="/manifest.webmanifest">
     <link rel="stylesheet" href="styles.css?v=tanlingo-v6">
 </head>
 
 <body>
     <section class="splash-screen" id="chatbot-splash" aria-label="Tanlingo inafunguka">
         <div class="splash-content">
-            <img class="splash-logo" src="/tanlingo-wordmark.svg?v=8" alt="Tanlingo">
+            <div class="splash-scene">
+                <span class="splash-waterline" aria-hidden="true"></span>
+                <span class="splash-ripple splash-ripple-one" aria-hidden="true"></span>
+                <span class="splash-ripple splash-ripple-two" aria-hidden="true"></span>
+                <span class="splash-spray splash-spray-one" aria-hidden="true"></span>
+                <span class="splash-spray splash-spray-two" aria-hidden="true"></span>
+                <span class="splash-spray splash-spray-three" aria-hidden="true"></span>
+                <div class="splash-app-mark">
+                    <img class="splash-app-icon" src="/tanlingo.svg" alt="Nembo ya Tanlingo">
+                </div>
+            </div>
+            <p class="splash-eyebrow">LUGHA ZA TANZANIA, KWA URAHISI</p>
+            <h1 class="splash-title" aria-label="Tanlingo"><span class="splash-wordmark" aria-hidden="true"><span>T</span><span>a</span><span>n</span><span>l</span><span>i</span><span>n</span><span>g</span><span>o</span></span></h1>
             <p class="splash-guide">Mawasiliano ya lugha za Tanzania, kwa urahisi.</p>
+            <button type="button" class="install-app-button splash-install-button" data-install-app>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 15v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg>
+                Sakinisha Tanlingo
+            </button>
+            <p class="splash-install-hint">Ongeza shortcut kwenye simu au kompyuta yako</p>
+            <div class="splash-progress-wrap" aria-label="Maendeleo ya kufungua Tanlingo">
+                <div class="splash-progress" aria-hidden="true"><span></span></div>
+                <div class="splash-progress-meta"><span>Inafunguka</span><span>7s</span></div>
+            </div>
         </div>
     </section>
+
+    <dialog class="install-help-dialog" id="install-help" aria-labelledby="install-help-title">
+        <div class="install-help-heading">
+            <img src="/tanlingo.svg" alt="" width="42" height="42">
+            <div>
+                <p class="install-help-eyebrow">TANLINGO APP</p>
+                <h2 id="install-help-title">Ongeza Tanlingo kwenye kifaa</h2>
+            </div>
+            <button type="button" class="install-help-close" data-close-install aria-label="Funga maelekezo">×</button>
+        </div>
+        <p class="install-help-intro">Chagua kifaa chako, kisha fuata hatua hizi ili kuweka shortcut kwenye skrini yako.</p>
+        <section class="install-platform" data-install-platform="android">
+            <h3>Android · Chrome</h3>
+            <ol>
+                <li>Gusa menyu ya nukta tatu <strong>⋮</strong> kwenye Chrome.</li>
+                <li>Chagua <strong>Install app</strong> au <strong>Add to Home screen</strong>.</li>
+                <li>Thibitisha kwa kugusa <strong>Install</strong> au <strong>Add</strong>.</li>
+            </ol>
+        </section>
+        <section class="install-platform" data-install-platform="ios">
+            <h3>iPhone au iPad · Safari</h3>
+            <ol>
+                <li>Gusa kitufe cha <strong>Share</strong> kwenye Safari.</li>
+                <li>Chagua <strong>Add to Home Screen</strong>.</li>
+                <li>Gusa <strong>Add</strong> ili kuweka Tanlingo kwenye skrini.</li>
+            </ol>
+        </section>
+        <section class="install-platform" data-install-platform="desktop">
+            <h3>Kompyuta · Chrome au Edge</h3>
+            <ol>
+                <li>Bonyeza alama ya kusakinisha iliyo pembeni ya address bar; au fungua menyu ya kivinjari <strong>⋮</strong>.</li>
+                <li>Chagua <strong>Install Tanlingo</strong> au <strong>Install this site as an app</strong>.</li>
+                <li>Thibitisha kusakinisha. Tanlingo itafunguka kama app tofauti.</li>
+            </ol>
+        </section>
+        <p class="install-help-note">Tumia Chrome, Edge au Safari na uhakikishe uko kwenye HTTPS ili kusakinisha.</p>
+    </dialog>
 
     <header class="hero">
         <div class="wrap hero-inner">
@@ -29,6 +89,10 @@
                     <span class="pill"><i class="dot"></i> CHATBOT</span>
                 </div>
             </div>
+            <button type="button" class="install-app-button install-nav-button index-install-button" data-install-app>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 15v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg>
+                Sakinisha
+            </button>
         </div>
     </header>
 
@@ -240,13 +304,14 @@
     </main>
 
     <footer><img src="/tanlingo-wordmark.svg?v=8" alt="Tanlingo"> · Sukuma · Kihaya/Ruhaya · Kinyakyusa · Kiswahili</footer>
+    <script src="/static/install.js" defer></script>
     <script>
         window.setTimeout(() => {
             const splash = document.getElementById("chatbot-splash");
             if (!splash) return;
             splash.classList.add("splash-hidden");
             window.setTimeout(() => splash.remove(), 700);
-        }, 1200);
+        }, 7000);
     </script>
     <script src="/static/app.js?v=global-conversation-settings-v3"></script>
     <script>
